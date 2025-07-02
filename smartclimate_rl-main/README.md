@@ -1,4 +1,4 @@
-![Gif](https://github.com/user-attachments/assets/9f426fad-823e-45b7-b589-aaa5a63ed0cb)
+![ezgif-347a404b25dd75](https://github.com/user-attachments/assets/665bb9c4-a11b-44d7-ac1a-a9bdc57e646b)
 
 
 # SmartClimate RL
