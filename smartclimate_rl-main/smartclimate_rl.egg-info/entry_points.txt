@@ -1,0 +1,3 @@
+[console_scripts]
+smartclimate-demo = smartclimate.examples.demo:main
+smartclimate-manual = smartclimate.examples.manual_test:main

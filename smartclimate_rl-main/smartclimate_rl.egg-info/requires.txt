@@ -1,0 +1,4 @@
+gymnasium
+ray[rllib]
+pygame
+numpy
