@@ -1,3 +1,9 @@
+
+![BusEnvGif](https://github.com/user-attachments/assets/735de23e-43e5-4eb4-bb08-f1965dd209f7)
+
+
+
+
 # Bus System Environment
 
 A custom OpenAI Gymnasium environment simulating an urban bus system with multiple buses operating on a circular route.
