@@ -1,8 +1,7 @@
 
 
 
-![Uploading Explosive_Turret_GIF.gif…]()
-
+![Explosive_Turret_GIF](https://github.com/user-attachments/assets/cceadaad-50df-4a2b-87ef-af660912b84c)
 
 
 
