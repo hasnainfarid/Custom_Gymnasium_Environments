@@ -1,3 +1,12 @@
+
+
+
+![Explosive_Turret_GIF](https://github.com/user-attachments/assets/cceadaad-50df-4a2b-87ef-af660912b84c)
+
+
+
+
+
 # Explosive Turret Environment
 
 A realistic Box2D + Pygame environment where a turret shoots explosive shells at destructible targets with castle/fortress background.
