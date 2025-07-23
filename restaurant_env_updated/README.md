@@ -1,3 +1,11 @@
+
+
+![RestaurantEnv](https://github.com/user-attachments/assets/7372a071-0fc2-45ab-b44b-636304d4380e)
+
+
+
+
+
 # Restaurant Management Environment for Reinforcement Learning
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
