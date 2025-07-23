@@ -1,0 +1,894 @@
+wandb_version: 1
+
+exploration_config:
+  desc: null
+  value: {}
+extra_python_environs_for_driver:
+  desc: null
+  value: {}
+extra_python_environs_for_worker:
+  desc: null
+  value: {}
+placement_strategy:
+  desc: null
+  value: PACK
+num_gpus:
+  desc: null
+  value: 0
+_fake_gpus:
+  desc: null
+  value: false
+num_cpus_for_main_process:
+  desc: null
+  value: 1
+eager_tracing:
+  desc: null
+  value: true
+eager_max_retraces:
+  desc: null
+  value: 20
+tf_session_args:
+  desc: null
+  value:
+    intra_op_parallelism_threads: 2
+    inter_op_parallelism_threads: 2
+    gpu_options:
+      allow_growth: true
+    log_device_placement: false
+    device_count:
+      CPU: 1
+    allow_soft_placement: true
+local_tf_session_args:
+  desc: null
+  value:
+    intra_op_parallelism_threads: 8
+    inter_op_parallelism_threads: 8
+torch_compile_learner:
+  desc: null
+  value: false
+torch_compile_learner_what_to_compile:
+  desc: null
+  value: TorchCompileWhatToCompile.FORWARD_TRAIN
+torch_compile_learner_dynamo_backend:
+  desc: null
+  value: inductor
+torch_compile_learner_dynamo_mode:
+  desc: null
+  value: null
+torch_compile_worker:
+  desc: null
+  value: false
+torch_compile_worker_dynamo_backend:
+  desc: null
+  value: onnxrt
+torch_compile_worker_dynamo_mode:
+  desc: null
+  value: null
+torch_ddp_kwargs:
+  desc: null
+  value: {}
+torch_skip_nan_gradients:
+  desc: null
+  value: false
+env:
+  desc: null
+  value: SmartParkingEnv-v0
+env_config:
+  desc: null
+  value: {}
+observation_space:
+  desc: null
+  value: null
+action_space:
+  desc: null
+  value: null
+clip_rewards:
+  desc: null
+  value: null
+normalize_actions:
+  desc: null
+  value: true
+clip_actions:
+  desc: null
+  value: false
+_is_atari:
+  desc: null
+  value: null
+disable_env_checking:
+  desc: null
+  value: false
+render_env:
+  desc: null
+  value: false
+action_mask_key:
+  desc: null
+  value: action_mask
+env_runner_cls:
+  desc: null
+  value: null
+num_env_runners:
+  desc: null
+  value: 6
+create_local_env_runner:
+  desc: null
+  value: true
+num_envs_per_env_runner:
+  desc: null
+  value: 24
+gym_env_vectorize_mode:
+  desc: null
+  value: SYNC
+num_cpus_per_env_runner:
+  desc: null
+  value: 1
+num_gpus_per_env_runner:
+  desc: null
+  value: 0
+custom_resources_per_env_runner:
+  desc: null
+  value: {}
+validate_env_runners_after_construction:
+  desc: null
+  value: true
+episodes_to_numpy:
+  desc: null
+  value: true
+max_requests_in_flight_per_env_runner:
+  desc: null
+  value: 1
+sample_timeout_s:
+  desc: null
+  value: 60.0
+_env_to_module_connector:
+  desc: null
+  value: <function <lambda> at 0x7fdf781416c0>
+add_default_connectors_to_env_to_module_pipeline:
+  desc: null
+  value: true
+_module_to_env_connector:
+  desc: null
+  value: null
+add_default_connectors_to_module_to_env_pipeline:
+  desc: null
+  value: true
+merge_env_runner_states:
+  desc: null
+  value: training_only
+broadcast_env_runner_states:
+  desc: null
+  value: true
+episode_lookback_horizon:
+  desc: null
+  value: 1
+rollout_fragment_length:
+  desc: null
+  value: auto
+batch_mode:
+  desc: null
+  value: truncate_episodes
+compress_observations:
+  desc: null
+  value: false
+remote_worker_envs:
+  desc: null
+  value: false
+remote_env_batch_wait_ms:
+  desc: null
+  value: 0
+enable_tf1_exec_eagerly:
+  desc: null
+  value: false
+sample_collector:
+  desc: null
+  value: ray.rllib.evaluation.collectors.simple_list_collector.SimpleListCollector
+preprocessor_pref:
+  desc: null
+  value: deepmind
+observation_filter:
+  desc: null
+  value: NoFilter
+update_worker_filter_stats:
+  desc: null
+  value: true
+use_worker_filter_stats:
+  desc: null
+  value: true
+sampler_perf_stats_ema_coef:
+  desc: null
+  value: null
+_is_online:
+  desc: null
+  value: true
+num_learners:
+  desc: null
+  value: 0
+num_gpus_per_learner:
+  desc: null
+  value: 0
+num_cpus_per_learner:
+  desc: null
+  value: auto
+num_aggregator_actors_per_learner:
+  desc: null
+  value: 0
+max_requests_in_flight_per_aggregator_actor:
+  desc: null
+  value: 3
+local_gpu_idx:
+  desc: null
+  value: 0
+max_requests_in_flight_per_learner:
+  desc: null
+  value: 3
+gamma:
+  desc: null
+  value: 0.99
+lr:
+  desc: null
+  value: 5.0e-05
+grad_clip:
+  desc: null
+  value: null
+grad_clip_by:
+  desc: null
+  value: global_norm
+_train_batch_size_per_learner:
+  desc: null
+  value: null
+train_batch_size:
+  desc: null
+  value: 4000
+num_epochs:
+  desc: null
+  value: 30
+minibatch_size:
+  desc: null
+  value: 128
+shuffle_batch_per_epoch:
+  desc: null
+  value: true
+model:
+  desc: null
+  value:
+    fcnet_hiddens:
+    - 256
+    - 256
+    fcnet_activation: tanh
+    fcnet_weights_initializer: null
+    fcnet_weights_initializer_config: null
+    fcnet_bias_initializer: null
+    fcnet_bias_initializer_config: null
+    conv_filters: null
+    conv_activation: relu
+    conv_kernel_initializer: null
+    conv_kernel_initializer_config: null
+    conv_bias_initializer: null
+    conv_bias_initializer_config: null
+    conv_transpose_kernel_initializer: null
+    conv_transpose_kernel_initializer_config: null
+    conv_transpose_bias_initializer: null
+    conv_transpose_bias_initializer_config: null
+    post_fcnet_hiddens: []
+    post_fcnet_activation: relu
+    post_fcnet_weights_initializer: null
+    post_fcnet_weights_initializer_config: null
+    post_fcnet_bias_initializer: null
+    post_fcnet_bias_initializer_config: null
+    free_log_std: false
+    log_std_clip_param: 20.0
+    no_final_linear: false
+    vf_share_layers: false
+    use_lstm: false
+    max_seq_len: 20
+    lstm_cell_size: 256
+    lstm_use_prev_action: false
+    lstm_use_prev_reward: false
+    lstm_weights_initializer: null
+    lstm_weights_initializer_config: null
+    lstm_bias_initializer: null
+    lstm_bias_initializer_config: null
+    _time_major: false
+    use_attention: false
+    attention_num_transformer_units: 1
+    attention_dim: 64
+    attention_num_heads: 1
+    attention_head_dim: 32
+    attention_memory_inference: 50
+    attention_memory_training: 50
+    attention_position_wise_mlp_dim: 32
+    attention_init_gru_gate_bias: 2.0
+    attention_use_n_prev_actions: 0
+    attention_use_n_prev_rewards: 0
+    framestack: true
+    dim: 84
+    grayscale: false
+    zero_mean: true
+    custom_model: null
+    custom_model_config: {}
+    custom_action_dist: null
+    custom_preprocessor: null
+    encoder_latent_dim: null
+    always_check_shapes: false
+    lstm_use_prev_action_reward: -1
+    _use_default_native_models: -1
+    _disable_preprocessor_api: false
+    _disable_action_flattening: false
+_learner_connector:
+  desc: null
+  value: null
+add_default_connectors_to_learner_pipeline:
+  desc: null
+  value: true
+learner_config_dict:
+  desc: null
+  value: {}
+optimizer:
+  desc: null
+  value: {}
+_learner_class:
+  desc: null
+  value: null
+callbacks_on_algorithm_init:
+  desc: null
+  value: null
+callbacks_on_env_runners_recreated:
+  desc: null
+  value: null
+callbacks_on_offline_eval_runners_recreated:
+  desc: null
+  value: null
+callbacks_on_checkpoint_loaded:
+  desc: null
+  value: null
+callbacks_on_environment_created:
+  desc: null
+  value: null
+callbacks_on_episode_created:
+  desc: null
+  value: null
+callbacks_on_episode_start:
+  desc: null
+  value: null
+callbacks_on_episode_step:
+  desc: null
+  value: null
+callbacks_on_episode_end:
+  desc: null
+  value: null
+callbacks_on_evaluate_start:
+  desc: null
+  value: null
+callbacks_on_evaluate_end:
+  desc: null
+  value: null
+callbacks_on_evaluate_offline_start:
+  desc: null
+  value: null
+callbacks_on_evaluate_offline_end:
+  desc: null
+  value: null
+callbacks_on_sample_end:
+  desc: null
+  value: null
+callbacks_on_train_result:
+  desc: null
+  value: null
+explore:
+  desc: null
+  value: true
+enable_rl_module_and_learner:
+  desc: null
+  value: true
+enable_env_runner_and_connector_v2:
+  desc: null
+  value: true
+_prior_exploration_config:
+  desc: null
+  value:
+    type: StochasticSampling
+count_steps_by:
+  desc: null
+  value: env_steps
+policy_map_capacity:
+  desc: null
+  value: 100
+policy_mapping_fn:
+  desc: null
+  value: ray.rllib.algorithms.algorithm_config.AlgorithmConfig.DEFAULT_POLICY_MAPPING_FN
+policies_to_train:
+  desc: null
+  value: null
+policy_states_are_swappable:
+  desc: null
+  value: false
+observation_fn:
+  desc: null
+  value: null
+offline_data_class:
+  desc: null
+  value: null
+input_read_method:
+  desc: null
+  value: read_parquet
+input_read_method_kwargs:
+  desc: null
+  value: {}
+input_read_schema:
+  desc: null
+  value: {}
+input_read_episodes:
+  desc: null
+  value: false
+input_read_sample_batches:
+  desc: null
+  value: false
+input_read_batch_size:
+  desc: null
+  value: null
+input_filesystem:
+  desc: null
+  value: null
+input_filesystem_kwargs:
+  desc: null
+  value: {}
+input_compress_columns:
+  desc: null
+  value:
+  - obs
+  - new_obs
+input_spaces_jsonable:
+  desc: null
+  value: true
+materialize_data:
+  desc: null
+  value: false
+materialize_mapped_data:
+  desc: null
+  value: true
+map_batches_kwargs:
+  desc: null
+  value: {}
+iter_batches_kwargs:
+  desc: null
+  value: {}
+ignore_final_observation:
+  desc: null
+  value: false
+prelearner_class:
+  desc: null
+  value: null
+prelearner_buffer_class:
+  desc: null
+  value: null
+prelearner_buffer_kwargs:
+  desc: null
+  value: {}
+prelearner_module_synch_period:
+  desc: null
+  value: 10
+dataset_num_iters_per_learner:
+  desc: null
+  value: null
+input_config:
+  desc: null
+  value: {}
+actions_in_input_normalized:
+  desc: null
+  value: false
+postprocess_inputs:
+  desc: null
+  value: false
+shuffle_buffer_size:
+  desc: null
+  value: 0
+output:
+  desc: null
+  value: null
+output_config:
+  desc: null
+  value: {}
+output_compress_columns:
+  desc: null
+  value:
+  - obs
+  - new_obs
+output_max_file_size:
+  desc: null
+  value: 67108864
+output_max_rows_per_file:
+  desc: null
+  value: null
+output_write_remaining_data:
+  desc: null
+  value: false
+output_write_method:
+  desc: null
+  value: write_parquet
+output_write_method_kwargs:
+  desc: null
+  value: {}
+output_filesystem:
+  desc: null
+  value: null
+output_filesystem_kwargs:
+  desc: null
+  value: {}
+output_write_episodes:
+  desc: null
+  value: true
+offline_sampling:
+  desc: null
+  value: false
+evaluation_interval:
+  desc: null
+  value: null
+evaluation_duration:
+  desc: null
+  value: 10
+evaluation_duration_unit:
+  desc: null
+  value: episodes
+evaluation_sample_timeout_s:
+  desc: null
+  value: 120.0
+evaluation_auto_duration_min_env_steps_per_sample:
+  desc: null
+  value: 100
+evaluation_auto_duration_max_env_steps_per_sample:
+  desc: null
+  value: 2000
+evaluation_parallel_to_training:
+  desc: null
+  value: false
+evaluation_force_reset_envs_before_iteration:
+  desc: null
+  value: true
+evaluation_config:
+  desc: null
+  value: null
+off_policy_estimation_methods:
+  desc: null
+  value: {}
+ope_split_batch_by_episode:
+  desc: null
+  value: true
+evaluation_num_env_runners:
+  desc: null
+  value: 0
+in_evaluation:
+  desc: null
+  value: false
+sync_filters_on_rollout_workers_timeout_s:
+  desc: null
+  value: 10.0
+offline_evaluation_interval:
+  desc: null
+  value: null
+num_offline_eval_runners:
+  desc: null
+  value: 0
+offline_evaluation_type:
+  desc: null
+  value: null
+offline_eval_runner_class:
+  desc: null
+  value: null
+offline_loss_for_module_fn:
+  desc: null
+  value: null
+offline_evaluation_duration:
+  desc: null
+  value: 1
+offline_evaluation_parallel_to_training:
+  desc: null
+  value: false
+offline_evaluation_timeout_s:
+  desc: null
+  value: 120.0
+num_cpus_per_offline_eval_runner:
+  desc: null
+  value: 1
+num_gpus_per_offline_eval_runner:
+  desc: null
+  value: 0
+custom_resources_per_offline_eval_runner:
+  desc: null
+  value: {}
+restart_failed_offline_eval_runners:
+  desc: null
+  value: true
+ignore_offline_eval_runner_failures:
+  desc: null
+  value: false
+max_num_offline_eval_runner_restarts:
+  desc: null
+  value: 1000
+offline_eval_runner_restore_timeout_s:
+  desc: null
+  value: 1800.0
+max_requests_in_flight_per_offline_eval_runner:
+  desc: null
+  value: 1
+validate_offline_eval_runners_after_construction:
+  desc: null
+  value: true
+offline_eval_runner_health_probe_timeout_s:
+  desc: null
+  value: 30.0
+offline_eval_rl_module_inference_only:
+  desc: null
+  value: false
+broadcast_offline_eval_runner_states:
+  desc: null
+  value: false
+offline_eval_batch_size_per_runner:
+  desc: null
+  value: 256
+dataset_num_iters_per_eval_runner:
+  desc: null
+  value: 1
+keep_per_episode_custom_metrics:
+  desc: null
+  value: false
+metrics_episode_collection_timeout_s:
+  desc: null
+  value: 60.0
+metrics_num_episodes_for_smoothing:
+  desc: null
+  value: 100
+min_time_s_per_iteration:
+  desc: null
+  value: null
+min_train_timesteps_per_iteration:
+  desc: null
+  value: 0
+min_sample_timesteps_per_iteration:
+  desc: null
+  value: 0
+log_gradients:
+  desc: null
+  value: true
+export_native_model_files:
+  desc: null
+  value: false
+checkpoint_trainable_policies_only:
+  desc: null
+  value: false
+logger_creator:
+  desc: null
+  value: null
+logger_config:
+  desc: null
+  value: null
+log_level:
+  desc: null
+  value: WARN
+log_sys_usage:
+  desc: null
+  value: true
+fake_sampler:
+  desc: null
+  value: false
+seed:
+  desc: null
+  value: null
+restart_failed_env_runners:
+  desc: null
+  value: true
+ignore_env_runner_failures:
+  desc: null
+  value: false
+max_num_env_runner_restarts:
+  desc: null
+  value: 1000
+delay_between_env_runner_restarts_s:
+  desc: null
+  value: 60.0
+restart_failed_sub_environments:
+  desc: null
+  value: false
+num_consecutive_env_runner_failures_tolerance:
+  desc: null
+  value: 100
+env_runner_health_probe_timeout_s:
+  desc: null
+  value: 30.0
+env_runner_restore_timeout_s:
+  desc: null
+  value: 1800.0
+_model_config:
+  desc: null
+  value: {}
+_rl_module_spec:
+  desc: null
+  value: null
+algorithm_config_overrides_per_module:
+  desc: null
+  value: {}
+_per_module_overrides:
+  desc: null
+  value: {}
+_validate_config:
+  desc: null
+  value: true
+_use_msgpack_checkpoints:
+  desc: null
+  value: false
+_torch_grad_scaler_class:
+  desc: null
+  value: null
+_torch_lr_scheduler_classes:
+  desc: null
+  value: null
+_tf_policy_handles_more_than_one_loss:
+  desc: null
+  value: false
+_disable_preprocessor_api:
+  desc: null
+  value: false
+_disable_action_flattening:
+  desc: null
+  value: false
+_disable_initialize_loss_from_dummy_batch:
+  desc: null
+  value: false
+_dont_auto_sync_env_runner_states:
+  desc: null
+  value: false
+env_task_fn:
+  desc: null
+  value: -1
+enable_connectors:
+  desc: null
+  value: -1
+simple_optimizer:
+  desc: null
+  value: false
+policy_map_cache:
+  desc: null
+  value: -1
+worker_cls:
+  desc: null
+  value: -1
+synchronize_filters:
+  desc: null
+  value: -1
+enable_async_evaluation:
+  desc: null
+  value: -1
+custom_async_evaluation_function:
+  desc: null
+  value: -1
+_enable_rl_module_api:
+  desc: null
+  value: -1
+auto_wrap_old_gym_envs:
+  desc: null
+  value: -1
+always_attach_evaluation_results:
+  desc: null
+  value: -1
+replay_sequence_length:
+  desc: null
+  value: null
+_disable_execution_plan_api:
+  desc: null
+  value: -1
+use_critic:
+  desc: null
+  value: true
+use_gae:
+  desc: null
+  value: true
+use_kl_loss:
+  desc: null
+  value: true
+kl_coeff:
+  desc: null
+  value: 0.2
+kl_target:
+  desc: null
+  value: 0.01
+vf_loss_coeff:
+  desc: null
+  value: 1.0
+entropy_coeff:
+  desc: null
+  value: 0.0
+clip_param:
+  desc: null
+  value: 0.3
+vf_clip_param:
+  desc: null
+  value: 10.0
+entropy_coeff_schedule:
+  desc: null
+  value: null
+lr_schedule:
+  desc: null
+  value: null
+sgd_minibatch_size:
+  desc: null
+  value: -1
+vf_share_layers:
+  desc: null
+  value: -1
+lambda:
+  desc: null
+  value: 1.0
+input:
+  desc: null
+  value: sampler
+policies:
+  desc: null
+  value:
+    default_policy:
+    - null
+    - null
+    - null
+    - null
+create_env_on_driver:
+  desc: null
+  value: false
+custom_eval_function:
+  desc: null
+  value: null
+framework:
+  desc: null
+  value: torch
+_wandb:
+  desc: null
+  value:
+    python_version: 3.11.7
+    cli_version: 0.15.10
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1753232926.224712
+    t:
+      1:
+      - 1
+      - 2
+      - 3
+      - 30
+      - 55
+      2:
+      - 1
+      - 2
+      - 3
+      - 30
+      - 55
+      3:
+      - 13
+      - 14
+      - 16
+      - 19
+      - 23
+      4: 3.11.7
+      5: 0.15.10
+      8:
+      - 8
+trial_log_path:
+  desc: null
+  value: /tmp/ray/session_2025-07-23_01-08-23_925131_8248/artifacts/2025-07-23_01-08-25/PPO_2025-07-23_01-08-23/driver_artifacts/PPO_SmartParkingEnv-v0_88e23_00000_0_2025-07-23_01-08-25
+__stdout_file__:
+  desc: null
+  value: null
+__stderr_file__:
+  desc: null
+  value: null
+trial_id:
+  desc: null
+  value: 88e23_00000
+date:
+  desc: null
+  value: 2025-07-23_01-30-57
+pid:
+  desc: null
+  value: 8806
+hostname:
+  desc: null
+  value: nrxr0b6i9i
+node_ip:
+  desc: null
+  value: 10.38.191.215

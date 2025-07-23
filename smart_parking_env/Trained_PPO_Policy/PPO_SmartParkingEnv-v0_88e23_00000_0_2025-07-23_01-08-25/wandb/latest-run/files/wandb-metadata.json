@@ -1,0 +1,101 @@
+{
+    "os": "Linux-5.19.0-45-generic-x86_64-with-glibc2.35",
+    "python": "3.11.7",
+    "heartbeatAt": "2025-07-23T01:08:46.837998",
+    "startedAt": "2025-07-23T01:08:46.221257",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--node-ip-address=10.38.191.215",
+        "--node-manager-port=37323",
+        "--object-store-name=/tmp/ray/session_2025-07-23_01-08-23_925131_8248/sockets/plasma_store",
+        "--raylet-name=/tmp/ray/session_2025-07-23_01-08-23_925131_8248/sockets/raylet",
+        "--redis-address=None",
+        "--metrics-agent-port=48390",
+        "--logging-rotate-bytes=536870912",
+        "--logging-rotate-backup-count=5",
+        "--runtime-env-agent-port=64967",
+        "--gcs-address=10.38.191.215:57925",
+        "--session-name=session_2025-07-23_01-08-23_925131_8248",
+        "--temp-dir=/tmp/ray",
+        "--webui=",
+        "--cluster-id=9af9a35cd8e433ddc89b8f0b32879c4415ee2b973717267fe6f61955",
+        "--startup-token=16",
+        "--worker-launch-time-ms=1753232916224",
+        "--node-id=a4d81160cce3a52efae3da827e36c1e6af32402aa08a92f3d39c141e",
+        "--runtime-env-hash=0",
+        "--enable-resource-isolation=false"
+    ],
+    "state": "running",
+    "program": "/usr/local/lib/python3.11/dist-packages/ray/_private/workers/default_worker.py",
+    "codePathLocal": null,
+    "host": "nrxr0b6i9i",
+    "username": "root",
+    "executable": "/usr/local/bin/python",
+    "cpu_count": 8,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 3201.893,
+        "min": 0.0,
+        "max": 0.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3201.893,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3201.893,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3201.893,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3201.893,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3201.893,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3201.893,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3201.893,
+            "min": 0.0,
+            "max": 0.0
+        },
+        {
+            "current": 3201.893,
+            "min": 0.0,
+            "max": 0.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 244.23077011108398,
+            "used": 98.10752868652344
+        }
+    },
+    "gpu": "NVIDIA RTX A6000",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA RTX A6000",
+            "memory_total": 51527024640
+        }
+    ],
+    "memory": {
+        "total": 44.08214569091797
+    }
+}

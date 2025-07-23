@@ -19,7 +19,8 @@ smart_parking_env/
 ├── examples/                # Example scripts
 │   ├── __init__.py
 │   ├── test_env.py         # Environment testing script
-│   └── training.py         # Ray RLlib training script
+│   ├── training.py         # Ray RLlib training script
+│   └── inference.py        # Policy inference script
 ├── __init__.py             # Main package initialization
 ├── setup.py                # Package installation
 ├── requirements.txt         # Dependencies
@@ -204,6 +205,65 @@ The environment includes a real-time pygame visualization showing:
 - **Early episodes**: Random actions, low revenue
 - **Mid training**: Basic patterns, improved revenue
 - **Advanced training**: Sophisticated strategies, high revenue
+
+## Running Trained Policies
+
+After training, you can run inference with your trained policy using the included inference script.
+
+### Using the Inference Script
+
+The inference script loads your trained PPO policy and runs it with real-time pygame visualization:
+
+```bash
+# Run inference with pygame visualization
+python examples/inference.py
+```
+
+**Features:**
+- **Real-time Visualization**: Pygame window showing live parking lot
+- **Policy Execution**: Your trained agent making decisions in real-time
+- **Complete Episode**: Full 24-hour simulation (1440 timesteps)
+- **Interactive Controls**: SPACE=pause, 1-4=speed, ESC=quit
+- **Live Statistics**: Revenue, occupancy, customer flow tracking
+
+### What You'll See
+
+The visualization shows:
+- **Live Parking Layout**: Three zones (A, B, C) with real car movements
+- **Customer Flow**: Cars arriving, parking, and leaving based on policy decisions
+- **Queue Management**: Customers waiting when lot is full
+- **Dynamic Pricing**: Current prices for each zone
+- **Statistics Panel**: Live revenue, occupancy, time progression
+- **Policy Actions**: Your trained agent's actual decisions visualized
+
+### Expected Performance
+
+A well-trained policy typically achieves:
+- **Revenue**: $3000-4000 per 24-hour episode
+- **Occupancy Rate**: 80-100% utilization
+- **Rejections**: 0-5 customers (excellent service)
+- **Return**: 3000-4000 cumulative reward
+
+### Policy Folder Structure
+
+The inference script expects your trained policy in:
+```
+Trained_PPO_Policy/
+└── PPO_SmartParkingEnv-v0_[experiment_id]_00000_0_[timestamp]/
+    └── checkpoint_000000/
+        ├── learner_group/
+        │   └── learner/
+        │       └── rl_module/
+        │           └── default_policy/
+        └── [other checkpoint files]
+```
+
+### Customization
+
+To use a different policy, update the `checkpoint_path` in `examples/inference.py`:
+```python
+checkpoint_path = r"path/to/your/policy/checkpoint_000000"
+```
 
 ## Success Metrics
 
