@@ -1,3 +1,11 @@
+
+
+![ParkingLot_SR](https://github.com/user-attachments/assets/8fbe470d-6743-4781-a689-06074b5ef40f)
+
+
+
+
+
 # Smart Parking Lot RL Environment
 
 A sophisticated reinforcement learning environment for smart parking lot management optimization. This environment simulates real-world parking challenges where an RL agent makes dynamic pricing and assignment decisions with advanced features.
