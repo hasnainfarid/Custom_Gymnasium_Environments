@@ -20,7 +20,7 @@ Year: 2025
 
 1. Clone the repository:
 ```bash
-git clone <your-repo-url>
+git clone <this-repo-url>
 cd snake_env
 ```
 
