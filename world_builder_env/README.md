@@ -1,3 +1,9 @@
+[Random Actions on the left, Trained Agent on the right]
+
+![FinalVideo_WorldBuilder](https://github.com/user-attachments/assets/f171acb6-8b54-4739-9049-e8ba847ede3a)
+
+
+
 # AI City Builder - Reinforcement Learning Project
 
 A reinforcement learning project where an AI agent learns to play a city-building game using PPO (Proximal Policy Optimization).
