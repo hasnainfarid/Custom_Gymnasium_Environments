@@ -10,11 +10,11 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name="hospital-management-env",
     version="1.0.0",
-    author="Hospital Management AI Team",
+    author="Hasnain Fareed",
     description="A realistic hospital operations simulation environment for reinforcement learning",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/hospital-management-env",
+    url="https://github.com/hasnainfareed/hospital-management-env",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",
