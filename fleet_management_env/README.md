@@ -342,8 +342,8 @@ If you use this environment in your research, please cite:
 ```bibtex
 @misc{fleet_management_env,
   title={Fleet Management Environment: A Multi-Agent Reinforcement Learning Environment for Urban Logistics},
-  author={Fleet Management Environment},
-  year={2024},
+  author={Hasnain Fareed},
+  year={2025},
   url={https://github.com/example/fleet_management_env}
 }
 ```
