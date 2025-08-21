@@ -1,0 +1,100 @@
+
+================================================================================
+SPACE STATION MISSION REPORT
+Generated: 2025-08-21 23:20:59
+================================================================================
+
+
+Scenario: NORMAL
+----------------------------------------
+Controller: auto
+Total Reward: -35430.00
+Steps Survived: 32
+Days Survived: 0
+Crew Casualties: 0
+System Failures: 0
+Min Crew Health: 100.0%
+Avg Crew Health: 100.0%
+Avg Battery Level: 30.1%
+Emergency Resolved: False
+Mission Success: False
+Performance Rating: FAIR (60/100)
+
+Scenario: POWER_FAILURE
+----------------------------------------
+Controller: auto
+Total Reward: 9330.00
+Steps Survived: 66
+Days Survived: 0
+Crew Casualties: 0
+System Failures: 0
+Min Crew Health: 100.0%
+Avg Crew Health: 100.0%
+Avg Battery Level: 56.1%
+Emergency Resolved: False
+Mission Success: False
+Performance Rating: GOOD (70/100)
+
+Scenario: ATMOSPHERIC_LEAK
+----------------------------------------
+Controller: auto
+Total Reward: -52230.00
+Steps Survived: 32
+Days Survived: 0
+Crew Casualties: 0
+System Failures: 0
+Min Crew Health: 100.0%
+Avg Crew Health: 100.0%
+Avg Battery Level: 30.9%
+Emergency Resolved: False
+Mission Success: False
+Performance Rating: FAIR (60/100)
+
+Scenario: MEDICAL_EMERGENCY
+----------------------------------------
+Controller: auto
+Total Reward: -3430.00
+Steps Survived: 32
+Days Survived: 0
+Crew Casualties: 0
+System Failures: 0
+Min Crew Health: 89.2%
+Avg Crew Health: 89.2%
+Avg Battery Level: 31.0%
+Emergency Resolved: False
+Mission Success: False
+Performance Rating: FAIR (60/100)
+
+Scenario: SOLAR_STORM
+----------------------------------------
+Controller: auto
+Total Reward: 30.00
+Steps Survived: 31
+Days Survived: 0
+Crew Casualties: 0
+System Failures: 0
+Min Crew Health: 100.0%
+Avg Crew Health: 100.0%
+Avg Battery Level: 30.1%
+Emergency Resolved: False
+Mission Success: False
+Performance Rating: FAIR (60/100)
+
+Scenario: CASCADE_FAILURE
+----------------------------------------
+Controller: auto
+Total Reward: -23780.00
+Steps Survived: 12
+Days Survived: 0
+Crew Casualties: 0
+System Failures: 0
+Min Crew Health: 100.0%
+Avg Crew Health: 100.0%
+Avg Battery Level: 21.5%
+Emergency Resolved: False
+Mission Success: False
+Performance Rating: FAIR (60/100)
+
+================================================================================
+END OF REPORT
+================================================================================
