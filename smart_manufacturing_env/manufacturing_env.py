@@ -4,11 +4,11 @@ A realistic factory floor simulation with production stations, quality control,
 and machine maintenance. All components are self-contained within the package.
 """
 
-import gym
-from gym import spaces
+import gymnasium as gym
+from gymnasium import spaces
 import numpy as np
 import pygame
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, List, Tuple, Optional, Any
 import random
 from dataclasses import dataclass
 from enum import Enum
@@ -69,9 +69,9 @@ class Station:
 class SmartManufacturingEnv(gym.Env):
     """Smart Manufacturing Environment for RL training"""
     
-    metadata = {'render.modes': ['human', 'rgb_array']}
+    metadata = {'render_modes': ['human', 'rgb_array']}
     
-    def __init__(self):
+    def __init__(self, render_mode: Optional[str] = None):
         super(SmartManufacturingEnv, self).__init__()
         
         # Environment dimensions
@@ -95,7 +95,7 @@ class SmartManufacturingEnv(gym.Env):
         self.screen = None
         self.clock = None
         self.font = None
-        self.render_mode = None
+        self.render_mode = render_mode
         
         # Production specifications
         self.product_specs = {
@@ -110,8 +110,10 @@ class SmartManufacturingEnv(gym.Env):
         # Initialize environment state
         self.reset()
     
-    def reset(self):
+    def reset(self, *, seed: Optional[int] = None, options: Optional[Dict[str, Any]] = None):
         """Reset the environment to initial state"""
+        super().reset(seed=seed)
+        
         # Initialize stations
         self.stations = []
         machine_types = [MachineType.CUTTING, MachineType.ASSEMBLY, 
@@ -125,7 +127,7 @@ class SmartManufacturingEnv(gym.Env):
                 position=(6 * (i + 1), 7),
                 utilization_rate=0.0,
                 operations_count=0,
-                maintenance_countdown=random.randint(100, 200),
+                maintenance_countdown=self.np_random.integers(100, 200),
                 current_product=None,
                 queue=[],
                 performance_degradation=0.0
@@ -145,12 +147,12 @@ class SmartManufacturingEnv(gym.Env):
         # Inventory and targets
         self.raw_material_inventory = 250
         self.production_targets = {
-            'A': random.randint(5, 10),
-            'B': random.randint(4, 8),
-            'C': random.randint(3, 6),
-            'D': random.randint(2, 5),
-            'E': random.randint(2, 4),
-            'F': random.randint(3, 7)
+            'A': self.np_random.integers(5, 10),
+            'B': self.np_random.integers(4, 8),
+            'C': self.np_random.integers(3, 6),
+            'D': self.np_random.integers(2, 5),
+            'E': self.np_random.integers(2, 4),
+            'F': self.np_random.integers(3, 7)
         }
         self.products_completed = {k: 0 for k in self.production_targets.keys()}
         
@@ -179,7 +181,15 @@ class SmartManufacturingEnv(gym.Env):
         # Worker shifts (efficiency modifier)
         self.current_shift_efficiency = 1.0
         
-        return self._get_observation()
+        info = {
+            'timestep': self.timestep,
+            'total_reward': self.total_reward,
+            'products_completed': self.products_completed.copy(),
+            'oee': self.oee_metrics.copy(),
+            'energy_consumption': self.energy_consumption
+        }
+        
+        return self._get_observation(), info
     
     def _get_observation(self):
         """Generate the observation vector (73 elements)"""
@@ -243,7 +253,8 @@ class SmartManufacturingEnv(gym.Env):
         """Execute one timestep of the environment"""
         self.timestep += 1
         reward = 0
-        done = False
+        terminated = False
+        truncated = False
         info = {}
         
         # Process action
@@ -265,7 +276,11 @@ class SmartManufacturingEnv(gym.Env):
         reward += self._calculate_timestep_rewards()
         
         # Check termination conditions
-        done = self._check_termination()
+        terminated = self._check_termination()
+        
+        # Check truncation (time limit)
+        if self.timestep >= 1500:
+            truncated = True
         
         # Update supply chain
         self._update_supply_chain()
@@ -283,7 +298,7 @@ class SmartManufacturingEnv(gym.Env):
             'energy_consumption': self.energy_consumption
         }
         
-        return self._get_observation(), reward, done, info
+        return self._get_observation(), reward, terminated, truncated, info
     
     def _process_action(self, action):
         """Process the selected action"""
@@ -350,7 +365,7 @@ class SmartManufacturingEnv(gym.Env):
         new_product = Product(
             product_type=product_enum,
             current_station=-1,  # Not yet at any station
-            quality_score=0.85 + random.uniform(-0.1, 0.1),
+            quality_score=0.85 + self.np_random.uniform(-0.1, 0.1),
             timesteps_remaining=product_enum.value[2],
             position=(0, 7),
             id=self.product_id_counter
@@ -419,13 +434,13 @@ class SmartManufacturingEnv(gym.Env):
                     station.status = MachineStatus.OPERATIONAL
                     station.performance_degradation = 0
                     station.operations_count = 0
-                    station.maintenance_countdown = random.randint(100, 200)
+                    station.maintenance_countdown = self.np_random.integers(100, 200)
             
             # Check for breakdowns
             elif station.status == MachineStatus.OPERATIONAL:
                 # Breakdown probability increases with usage
                 breakdown_prob = 0.001 * (1 + station.operations_count / 100)
-                if random.random() < breakdown_prob:
+                if self.np_random.random() < breakdown_prob:
                     station.status = MachineStatus.BROKEN
                     station.maintenance_countdown = 30
                 
@@ -444,7 +459,7 @@ class SmartManufacturingEnv(gym.Env):
                 station.maintenance_countdown -= 1
                 if station.maintenance_countdown <= 0:
                     station.status = MachineStatus.OPERATIONAL
-                    station.maintenance_countdown = random.randint(100, 200)
+                    station.maintenance_countdown = self.np_random.integers(100, 200)
     
     def _quality_control(self):
         """Perform quality control checks"""
@@ -565,9 +580,9 @@ class SmartManufacturingEnv(gym.Env):
     def _update_supply_chain(self):
         """Update supply chain and raw materials"""
         # Random supply disruptions
-        if not self.supply_disruption and random.random() < 0.01:
+        if not self.supply_disruption and self.np_random.random() < 0.01:
             self.supply_disruption = True
-            self.supply_disruption_countdown = random.randint(20, 50)
+            self.supply_disruption_countdown = self.np_random.integers(20, 50)
         
         if self.supply_disruption:
             self.supply_disruption_countdown -= 1
@@ -577,7 +592,7 @@ class SmartManufacturingEnv(gym.Env):
             # Regular material delivery
             if self.timestep % 50 == 0:
                 self.raw_material_inventory = min(500, 
-                    self.raw_material_inventory + random.randint(50, 100))
+                    self.raw_material_inventory + self.np_random.integers(50, 100))
     
     def _update_shifts(self):
         """Update worker shift efficiency"""
@@ -590,42 +605,71 @@ class SmartManufacturingEnv(gym.Env):
         else:
             self.current_shift_efficiency = 0.9  # Night shift
     
-    def render(self, mode='human'):
+    def render(self):
         """Render the environment using pygame"""
-        if self.screen is None:
-            pygame.init()
-            self.screen = pygame.display.set_mode((1200, 600))
-            pygame.display.set_caption("Smart Manufacturing Environment")
-            self.clock = pygame.time.Clock()
-            self.font = pygame.font.Font(None, 24)
-        
-        # Clear screen
-        self.screen.fill((240, 240, 240))
-        
-        # Draw factory floor
-        self._draw_factory_floor()
-        
-        # Draw stations
-        self._draw_stations()
-        
-        # Draw products
-        self._draw_products()
-        
-        # Draw dashboard
-        self._draw_dashboard()
-        
-        # Draw alerts
-        self._draw_alerts()
-        
-        # Update display
-        pygame.display.flip()
-        self.clock.tick(30)
-        
-        if mode == 'rgb_array':
+        if self.render_mode == "human":
+            if self.screen is None:
+                pygame.init()
+                self.screen = pygame.display.set_mode((1200, 600))
+                pygame.display.set_caption("Smart Manufacturing Environment")
+                self.clock = pygame.time.Clock()
+                self.font = pygame.font.Font(None, 24)
+            
+            # Clear screen
+            self.screen.fill((240, 240, 240))
+            
+            # Draw factory floor
+            self._draw_factory_floor()
+            
+            # Draw stations
+            self._draw_stations()
+            
+            # Draw products
+            self._draw_products()
+            
+            # Draw dashboard
+            self._draw_dashboard()
+            
+            # Draw alerts
+            self._draw_alerts()
+            
+            # Update display
+            pygame.display.flip()
+            self.clock.tick(30)
+            
+        elif self.render_mode == "rgb_array":
+            if self.screen is None:
+                pygame.init()
+                self.screen = pygame.display.set_mode((1200, 600))
+                pygame.display.set_caption("Smart Manufacturing Environment")
+                self.clock = pygame.time.Clock()
+                self.font = pygame.font.Font(None, 24)
+            
+            # Clear screen
+            self.screen.fill((240, 240, 240))
+            
+            # Draw factory floor
+            self._draw_factory_floor()
+            
+            # Draw stations
+            self._draw_stations()
+            
+            # Draw products
+            self._draw_products()
+            
+            # Draw dashboard
+            self._draw_dashboard()
+            
+            # Draw alerts
+            self._draw_alerts()
+            
+            # Return RGB array
             return np.transpose(
                 np.array(pygame.surfarray.pixels3d(self.screen)), 
                 axes=(1, 0, 2)
             )
+        
+        return None
     
     def _draw_factory_floor(self):
         """Draw the factory floor layout"""

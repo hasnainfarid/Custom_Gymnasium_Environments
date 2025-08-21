@@ -12,7 +12,7 @@ All test data and results are generated and stored within the package.
 import numpy as np
 import matplotlib.pyplot as plt
 import pygame
-import gym
+import gymnasium as gym
 import json
 import os
 from datetime import datetime
@@ -182,7 +182,7 @@ class ScenarioTester:
             # Configure environment for scenario
             self._configure_scenario(scenario_name)
             
-            obs = self.env.reset()
+            obs, info = self.env.reset()
             episode_reward = 0
             episode_metrics = {
                 'rewards': [],
@@ -195,7 +195,7 @@ class ScenarioTester:
             
             for step in range(max_steps):
                 action = agent.get_action(obs, self.env)
-                obs, reward, done, info = self.env.step(action)
+                obs, reward, terminated, truncated, info = self.env.step(action)
                 
                 episode_reward += reward
                 episode_metrics['rewards'].append(reward)
@@ -218,7 +218,7 @@ class ScenarioTester:
                         if event.type == pygame.QUIT:
                             render = False
                 
-                if done:
+                if terminated or truncated:
                     break
             
             # Calculate episode statistics
@@ -525,7 +525,7 @@ def main():
     print("="*60)
     
     # Create environment
-    env = SmartManufacturingEnv()
+    env = SmartManufacturingEnv(render_mode="human")
     tester = ScenarioTester(env)
     
     # Test scenarios
@@ -539,10 +539,10 @@ def main():
     # Run tests with both strategies
     for scenario in scenarios:
         # Test reactive strategy
-        tester.run_scenario(scenario, episodes=3, agent_strategy='reactive', render=False)
+        tester.run_scenario(scenario, episodes=3, agent_strategy='reactive', render=True)
         
         # Test predictive strategy
-        tester.run_scenario(scenario, episodes=3, agent_strategy='predictive', render=False)
+        tester.run_scenario(scenario, episodes=3, agent_strategy='predictive', render=True)
     
     # Generate comprehensive report
     report = tester.generate_report()
@@ -555,17 +555,17 @@ def main():
     print("Running normal production scenario with predictive maintenance...")
     
     # Create fresh environment for visualization
-    demo_env = SmartManufacturingEnv()
+    demo_env = SmartManufacturingEnv(render_mode="human")
     demo_agent = ManufacturingAgent(strategy='predictive')
     
-    obs = demo_env.reset()
+    obs, info = demo_env.reset()
     running = True
     step_count = 0
     max_demo_steps = 500
     
     while running and step_count < max_demo_steps:
         action = demo_agent.get_action(obs, demo_env)
-        obs, reward, done, info = demo_env.step(action)
+        obs, reward, terminated, truncated, info = demo_env.step(action)
         
         demo_env.render()
         
@@ -579,7 +579,7 @@ def main():
         
         step_count += 1
         
-        if done:
+        if terminated or truncated:
             print(f"\nEpisode completed!")
             print(f"Total reward: {info['total_reward']:.0f}")
             print(f"Products completed: {sum(info['products_completed'].values())}")

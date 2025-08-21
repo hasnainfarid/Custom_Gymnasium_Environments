@@ -9,13 +9,13 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="smart_manufacturing_env",
-    version="1.0.0",
-    author="Manufacturing AI Lab",
-    author_email="contact@manufacturingai.lab",
+    version="1.1.0",
+    author="Hasnain Fareed",
+    author_email="",
     description="A comprehensive smart manufacturing environment for reinforcement learning",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/manufacturing-ai/smart_manufacturing_env",
+    url="https://github.com/hasnainfareed/smart_manufacturing_env",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -30,7 +30,7 @@ setup(
     ],
     python_requires=">=3.7",
     install_requires=[
-        "gym>=0.21.0",
+        "gymnasium>=0.29.0",
         "numpy>=1.19.0",
         "pygame>=2.0.0",
         "matplotlib>=3.3.0",
