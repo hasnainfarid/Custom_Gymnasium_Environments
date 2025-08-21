@@ -6,7 +6,7 @@ Demonstrates functionality with visualization, manual control, and automated tes
 import pygame
 import numpy as np
 import time
-from warehouse_env import WarehouseEnv, Action
+from .warehouse_env import WarehouseEnv, Action
 import random
 
 class WarehouseTester:
