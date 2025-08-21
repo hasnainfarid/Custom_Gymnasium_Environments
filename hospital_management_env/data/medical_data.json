@@ -1,0 +1,327 @@
+{
+  "diseases": {
+    "cardiac": {
+      "severity_distribution": [0.1, 0.2, 0.3, 0.25, 0.15],
+      "treatment_times": [20, 30, 60, 90, 120],
+      "department": "emergency",
+      "equipment_needed": ["ecg", "defibrillator"],
+      "medicines": ["blood_pressure", "anticoagulants", "painkillers"],
+      "mortality_risk": 0.15
+    },
+    "respiratory": {
+      "severity_distribution": [0.2, 0.3, 0.25, 0.15, 0.1],
+      "treatment_times": [15, 25, 45, 75, 100],
+      "department": "emergency",
+      "equipment_needed": ["ventilator", "xray"],
+      "medicines": ["bronchodilators", "steroids", "antibiotics"],
+      "mortality_risk": 0.12
+    },
+    "trauma": {
+      "severity_distribution": [0.15, 0.2, 0.25, 0.25, 0.15],
+      "treatment_times": [25, 40, 60, 90, 150],
+      "department": "emergency",
+      "equipment_needed": ["xray", "ct_scanner", "surgical_robot"],
+      "medicines": ["painkillers", "anesthetics", "antibiotics"],
+      "mortality_risk": 0.18
+    },
+    "neurological": {
+      "severity_distribution": [0.1, 0.15, 0.25, 0.3, 0.2],
+      "treatment_times": [30, 45, 70, 100, 140],
+      "department": "icu",
+      "equipment_needed": ["mri", "ct_scanner"],
+      "medicines": ["anticoagulants", "painkillers", "steroids"],
+      "mortality_risk": 0.2
+    },
+    "infection": {
+      "severity_distribution": [0.3, 0.3, 0.2, 0.15, 0.05],
+      "treatment_times": [20, 30, 50, 80, 110],
+      "department": "general_ward",
+      "equipment_needed": ["ultrasound"],
+      "medicines": ["antibiotics", "antivirals", "painkillers"],
+      "mortality_risk": 0.08
+    },
+    "diabetes": {
+      "severity_distribution": [0.4, 0.3, 0.2, 0.08, 0.02],
+      "treatment_times": [15, 25, 40, 60, 90],
+      "department": "general_ward",
+      "equipment_needed": [],
+      "medicines": ["insulin", "blood_pressure"],
+      "mortality_risk": 0.05
+    },
+    "hypertension": {
+      "severity_distribution": [0.35, 0.35, 0.2, 0.08, 0.02],
+      "treatment_times": [15, 20, 35, 50, 80],
+      "department": "general_ward",
+      "equipment_needed": ["ecg"],
+      "medicines": ["blood_pressure", "diuretics"],
+      "mortality_risk": 0.04
+    },
+    "fracture": {
+      "severity_distribution": [0.25, 0.35, 0.25, 0.1, 0.05],
+      "treatment_times": [30, 45, 60, 90, 120],
+      "department": "surgery",
+      "equipment_needed": ["xray", "surgical_robot"],
+      "medicines": ["painkillers", "anesthetics", "antibiotics"],
+      "mortality_risk": 0.02
+    },
+    "poisoning": {
+      "severity_distribution": [0.2, 0.25, 0.25, 0.2, 0.1],
+      "treatment_times": [20, 30, 45, 70, 100],
+      "department": "emergency",
+      "equipment_needed": ["dialysis"],
+      "medicines": ["antihistamines", "steroids"],
+      "mortality_risk": 0.1
+    },
+    "burn": {
+      "severity_distribution": [0.3, 0.25, 0.2, 0.15, 0.1],
+      "treatment_times": [25, 40, 60, 90, 130],
+      "department": "emergency",
+      "equipment_needed": [],
+      "medicines": ["painkillers", "antibiotics", "steroids"],
+      "mortality_risk": 0.12
+    },
+    "stroke": {
+      "severity_distribution": [0.05, 0.1, 0.2, 0.35, 0.3],
+      "treatment_times": [40, 60, 90, 120, 160],
+      "department": "icu",
+      "equipment_needed": ["ct_scanner", "mri"],
+      "medicines": ["anticoagulants", "blood_pressure"],
+      "mortality_risk": 0.25
+    },
+    "pneumonia": {
+      "severity_distribution": [0.2, 0.3, 0.25, 0.15, 0.1],
+      "treatment_times": [25, 35, 55, 85, 110],
+      "department": "general_ward",
+      "equipment_needed": ["xray", "ventilator"],
+      "medicines": ["antibiotics", "steroids", "bronchodilators"],
+      "mortality_risk": 0.09
+    },
+    "appendicitis": {
+      "severity_distribution": [0.1, 0.2, 0.3, 0.3, 0.1],
+      "treatment_times": [30, 45, 70, 100, 130],
+      "department": "surgery",
+      "equipment_needed": ["ultrasound", "surgical_robot"],
+      "medicines": ["antibiotics", "anesthetics", "painkillers"],
+      "mortality_risk": 0.03
+    },
+    "kidney_failure": {
+      "severity_distribution": [0.1, 0.15, 0.25, 0.3, 0.2],
+      "treatment_times": [40, 60, 90, 120, 150],
+      "department": "icu",
+      "equipment_needed": ["dialysis", "ultrasound"],
+      "medicines": ["diuretics", "blood_pressure"],
+      "mortality_risk": 0.15
+    },
+    "cancer": {
+      "severity_distribution": [0.05, 0.1, 0.2, 0.35, 0.3],
+      "treatment_times": [60, 90, 120, 150, 180],
+      "department": "general_ward",
+      "equipment_needed": ["ct_scanner", "mri"],
+      "medicines": ["chemotherapy", "painkillers", "steroids"],
+      "mortality_risk": 0.3
+    },
+    "flu": {
+      "severity_distribution": [0.4, 0.3, 0.2, 0.08, 0.02],
+      "treatment_times": [15, 25, 40, 60, 90],
+      "department": "general_ward",
+      "equipment_needed": [],
+      "medicines": ["antivirals", "painkillers", "antihistamines"],
+      "mortality_risk": 0.02,
+      "contagious": true,
+      "outbreak_multiplier": 2.5
+    },
+    "covid": {
+      "severity_distribution": [0.3, 0.25, 0.2, 0.15, 0.1],
+      "treatment_times": [20, 35, 60, 90, 140],
+      "department": "emergency",
+      "equipment_needed": ["ventilator", "xray"],
+      "medicines": ["antivirals", "steroids", "antibiotics"],
+      "mortality_risk": 0.05,
+      "contagious": true,
+      "outbreak_multiplier": 3.0
+    },
+    "gastro": {
+      "severity_distribution": [0.35, 0.35, 0.2, 0.08, 0.02],
+      "treatment_times": [15, 25, 40, 60, 80],
+      "department": "general_ward",
+      "equipment_needed": [],
+      "medicines": ["antibiotics", "antihistamines"],
+      "mortality_risk": 0.01,
+      "contagious": true,
+      "outbreak_multiplier": 2.0
+    }
+  },
+  "age_groups": {
+    "pediatric": {
+      "age_range": [0, 18],
+      "arrival_rate_modifier": 1.2,
+      "severity_modifier": -0.1,
+      "recovery_modifier": 1.3
+    },
+    "adult": {
+      "age_range": [19, 64],
+      "arrival_rate_modifier": 1.0,
+      "severity_modifier": 0.0,
+      "recovery_modifier": 1.0
+    },
+    "elderly": {
+      "age_range": [65, 100],
+      "arrival_rate_modifier": 1.5,
+      "severity_modifier": 0.3,
+      "recovery_modifier": 0.7
+    }
+  },
+  "seasonal_patterns": {
+    "winter": {
+      "months": [12, 1, 2],
+      "disease_modifiers": {
+        "flu": 2.0,
+        "pneumonia": 1.5,
+        "respiratory": 1.3
+      }
+    },
+    "spring": {
+      "months": [3, 4, 5],
+      "disease_modifiers": {
+        "poisoning": 1.2
+      }
+    },
+    "summer": {
+      "months": [6, 7, 8],
+      "disease_modifiers": {
+        "burn": 1.4,
+        "trauma": 1.3,
+        "gastro": 1.5
+      }
+    },
+    "fall": {
+      "months": [9, 10, 11],
+      "disease_modifiers": {
+        "flu": 1.3
+      }
+    }
+  },
+  "staff_specializations": {
+    "emergency": {
+      "efficiency_bonus": 1.2,
+      "compatible_diseases": ["cardiac", "respiratory", "trauma", "burn", "poisoning"],
+      "training_time": 180
+    },
+    "icu": {
+      "efficiency_bonus": 1.3,
+      "compatible_diseases": ["neurological", "stroke", "kidney_failure"],
+      "training_time": 240
+    },
+    "general": {
+      "efficiency_bonus": 1.0,
+      "compatible_diseases": ["infection", "diabetes", "hypertension", "pneumonia", "flu", "gastro"],
+      "training_time": 120
+    },
+    "surgeon": {
+      "efficiency_bonus": 1.4,
+      "compatible_diseases": ["fracture", "appendicitis", "trauma"],
+      "training_time": 360
+    },
+    "specialist": {
+      "efficiency_bonus": 1.5,
+      "compatible_diseases": ["cancer", "kidney_failure", "neurological"],
+      "training_time": 300
+    },
+    "chief": {
+      "efficiency_bonus": 1.6,
+      "compatible_diseases": "all",
+      "training_time": 480
+    }
+  },
+  "equipment_specifications": {
+    "ventilator": {
+      "cost": 50000,
+      "maintenance_interval": 720,
+      "failure_rate": 0.001,
+      "critical": true
+    },
+    "xray": {
+      "cost": 100000,
+      "maintenance_interval": 1440,
+      "failure_rate": 0.0005,
+      "critical": false
+    },
+    "mri": {
+      "cost": 2000000,
+      "maintenance_interval": 2880,
+      "failure_rate": 0.0008,
+      "critical": false
+    },
+    "ct_scanner": {
+      "cost": 500000,
+      "maintenance_interval": 2160,
+      "failure_rate": 0.0007,
+      "critical": false
+    },
+    "ultrasound": {
+      "cost": 30000,
+      "maintenance_interval": 1440,
+      "failure_rate": 0.0003,
+      "critical": false
+    },
+    "defibrillator": {
+      "cost": 20000,
+      "maintenance_interval": 720,
+      "failure_rate": 0.0002,
+      "critical": true
+    },
+    "ecg": {
+      "cost": 10000,
+      "maintenance_interval": 720,
+      "failure_rate": 0.0001,
+      "critical": false
+    },
+    "dialysis": {
+      "cost": 75000,
+      "maintenance_interval": 480,
+      "failure_rate": 0.0015,
+      "critical": true
+    },
+    "anesthesia": {
+      "cost": 40000,
+      "maintenance_interval": 360,
+      "failure_rate": 0.0004,
+      "critical": true
+    },
+    "surgical_robot": {
+      "cost": 1500000,
+      "maintenance_interval": 1440,
+      "failure_rate": 0.001,
+      "critical": false
+    }
+  },
+  "treatment_protocols": {
+    "triage": {
+      "severity_5": {
+        "max_wait": 0,
+        "priority": 1,
+        "staff_required": 3
+      },
+      "severity_4": {
+        "max_wait": 10,
+        "priority": 2,
+        "staff_required": 2
+      },
+      "severity_3": {
+        "max_wait": 30,
+        "priority": 3,
+        "staff_required": 2
+      },
+      "severity_2": {
+        "max_wait": 60,
+        "priority": 4,
+        "staff_required": 1
+      },
+      "severity_1": {
+        "max_wait": 120,
+        "priority": 5,
+        "staff_required": 1
+      }
+    }
+  }
+}
