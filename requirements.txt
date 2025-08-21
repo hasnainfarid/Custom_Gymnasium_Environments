@@ -1,0 +1,14 @@
+# Core dependencies for Crypto Trading Environment
+gymnasium>=0.29.0
+numpy>=1.21.0
+pandas>=1.3.0
+matplotlib>=3.5.0
+pygame>=2.1.0
+
+# Optional dependencies for enhanced functionality
+scipy>=1.7.0
+scikit-learn>=1.0.0
+
+# Development and testing
+pytest>=6.0.0
+jupyter>=1.0.0
