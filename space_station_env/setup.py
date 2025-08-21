@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name="space_station_env",
     version="1.0.0",
-    author="Space Station Environment Team",
+    author="Hasnain Fareed",
     description="A comprehensive space station life support management environment",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
