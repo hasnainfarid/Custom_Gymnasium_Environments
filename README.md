@@ -1,1 +1,1 @@
-Custom Reinforcement learning environments made using Open-AI gymnasium for different use cases.
+Custom Reinforcement Learning environments built with OpenAI Gymnasium, featuring diverse real-world scenarios including warehouse logistics, fleet management, smart manufacturing, and more. Each environment offers unique challenges with realistic physics, multi-objective rewards, and integrated visualizations for training intelligent agents across different domains.
