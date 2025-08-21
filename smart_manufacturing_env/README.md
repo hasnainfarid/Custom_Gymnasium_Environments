@@ -1,3 +1,7 @@
+
+<img width="1488" height="783" alt="Manufacturing_00" src="https://github.com/user-attachments/assets/b271604c-971e-41ab-bb47-3c6f95ba8bde" />
+
+
 # Smart Manufacturing Environment
 
 A comprehensive reinforcement learning environment that simulates a realistic smart manufacturing facility with production stations, quality control, and predictive maintenance capabilities.
