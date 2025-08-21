@@ -1,3 +1,8 @@
+
+<img width="1240" height="1002" alt="Hospital_00" src="https://github.com/user-attachments/assets/afd48e39-05b8-4e94-9364-a437201ce20c" />
+
+
+
 # Hospital Management Environment
 
 A comprehensive reinforcement learning environment that simulates realistic hospital operations with patient management, resource allocation, and emergency response capabilities.
