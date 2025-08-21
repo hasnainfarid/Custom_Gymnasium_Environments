@@ -25,7 +25,7 @@ def read_version():
 setup(
     name="fleet_management_env",
     version=read_version(),
-    author="Fleet Management Environment Team",
+    author="Fleet Management Environment",
     author_email="fleet-env@example.com",
     description="A comprehensive multi-agent reinforcement learning environment for urban delivery logistics",
     long_description=read_readme(),
@@ -36,7 +36,7 @@ setup(
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "Intended Audience :: Science/Research",
-        "License :: OSI Approved :: MIT License",
+        "License :: Other/Proprietary License",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.8",
@@ -108,6 +108,6 @@ setup(
     project_urls={
         "Bug Reports": "https://github.com/example/fleet_management_env/issues",
         "Source": "https://github.com/example/fleet_management_env",
-        "Documentation": "https://fleet-management-env.readthedocs.io/",
+        "Documentation": "https://github.com/example/fleet_management_env",
     },
 )

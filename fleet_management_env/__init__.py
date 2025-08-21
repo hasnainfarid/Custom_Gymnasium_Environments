@@ -9,7 +9,7 @@ from gymnasium.envs.registration import register
 from .fleet_env import FleetManagementEnv
 
 __version__ = "1.0.0"
-__author__ = "Fleet Management Environment Team"
+__author__ = "Fleet Management Environment"
 
 # Register the environment with Gymnasium
 register(

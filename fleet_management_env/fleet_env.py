@@ -171,7 +171,7 @@ class FleetManagementEnv(gym.Env):
         self.render_mode = render_mode
         self.window = None
         self.clock = None
-        self.window_size = (1000, 800)
+        self.window_size = (1100, 700)
         
         # Performance tracking
         self.episode_stats = {
@@ -607,8 +607,212 @@ class FleetManagementEnv(gym.Env):
             "missed_deadlines": self.missed_deadlines
         }
     
+    def _draw_gradient_background(self, surface):
+        """Draw a gradient background"""
+        width, height = surface.get_size()
+        # Sky blue to light gray gradient
+        for y in range(height):
+            ratio = y / height
+            r = int(135 + (240 - 135) * ratio)  # 135 to 240
+            g = int(206 + (240 - 206) * ratio)  # 206 to 240  
+            b = int(235 + (240 - 235) * ratio)  # 235 to 240
+            color = (r, g, b)
+            pygame.draw.line(surface, color, (0, y), (width, y))
+    
+    def _draw_3d_rect(self, surface, color, rect, depth=3):
+        """Draw a 3D-looking rectangle with depth"""
+        # Main rectangle
+        pygame.draw.rect(surface, color, rect)
+        
+        # Highlight (top and left)
+        highlight_color = tuple(min(255, c + 40) for c in color)
+        pygame.draw.line(surface, highlight_color, 
+                        (rect.left, rect.top), (rect.right-1, rect.top), 2)
+        pygame.draw.line(surface, highlight_color,
+                        (rect.left, rect.top), (rect.left, rect.bottom-1), 2)
+        
+        # Shadow (bottom and right)
+        shadow_color = tuple(max(0, c - 40) for c in color)
+        pygame.draw.line(surface, shadow_color,
+                        (rect.left+1, rect.bottom-1), (rect.right-1, rect.bottom-1), 2)
+        pygame.draw.line(surface, shadow_color,
+                        (rect.right-1, rect.top+1), (rect.right-1, rect.bottom-1), 2)
+    
+    def _draw_3d_circle(self, surface, color, center, radius):
+        """Draw a 3D-looking circle with gradient"""
+        # Create gradient effect
+        for i in range(radius, 0, -1):
+            ratio = i / radius
+            # Lighter towards center
+            r = min(255, int(color[0] + (255 - color[0]) * (1 - ratio) * 0.3))
+            g = min(255, int(color[1] + (255 - color[1]) * (1 - ratio) * 0.3))
+            b = min(255, int(color[2] + (255 - color[2]) * (1 - ratio) * 0.3))
+            pygame.draw.circle(surface, (r, g, b), center, i)
+        
+        # Highlight
+        highlight_center = (center[0] - radius//3, center[1] - radius//3)
+        pygame.draw.circle(surface, (255, 255, 255), highlight_center, radius//4)
+    
+    def _draw_building(self, surface, rect, color, building_type="generic"):
+        """Draw a 3D building with depth"""
+        # Base building
+        self._draw_3d_rect(surface, color, rect, depth=4)
+        
+        # Add building details based on type
+        if building_type == "residential":
+            # Add windows
+            window_size = max(2, rect.width // 8)
+            for i in range(2):
+                for j in range(2):
+                    window_x = rect.x + rect.width//4 + i * rect.width//2
+                    window_y = rect.y + rect.height//4 + j * rect.height//3
+                    window_rect = pygame.Rect(window_x, window_y, window_size, window_size)
+                    pygame.draw.rect(surface, (100, 150, 200), window_rect)
+        
+        elif building_type == "commercial":
+            # Add glass windows
+            window_width = rect.width - 4
+            window_height = max(2, rect.height // 4)
+            for i in range(3):
+                window_y = rect.y + 2 + i * (rect.height // 3)
+                window_rect = pygame.Rect(rect.x + 2, window_y, window_width, window_height)
+                pygame.draw.rect(surface, (150, 200, 255), window_rect)
+        
+        elif building_type == "industrial":
+            # Add industrial details
+            pygame.draw.rect(surface, (80, 80, 80), 
+                           (rect.x + rect.width//4, rect.y, rect.width//2, rect.height//4))
+    
+    def _draw_enhanced_vehicle(self, surface, vehicle, center, cell_size):
+        """Draw enhanced 3D vehicle with details"""
+        vehicle_colors = {
+            VehicleType.VAN: (30, 100, 200),      # Deep blue
+            VehicleType.MOTORCYCLE: (50, 150, 50), # Forest green
+            VehicleType.TRUCK: (180, 50, 50)       # Deep red
+        }
+        
+        color = vehicle_colors[vehicle.vehicle_type]
+        
+        if vehicle.vehicle_type == VehicleType.VAN:
+            # Enhanced van with 3D effect
+            van_rect = pygame.Rect(center[0] - cell_size//3, center[1] - cell_size//3, 
+                                 2*cell_size//3, 2*cell_size//3)
+            self._draw_3d_rect(surface, color, van_rect)
+            
+            # Add van details
+            # Front windshield
+            windshield = pygame.Rect(van_rect.x + 2, van_rect.y + 2, 
+                                   van_rect.width - 4, van_rect.height//3)
+            pygame.draw.rect(surface, (200, 220, 255), windshield)
+            
+            # Side windows
+            side_window = pygame.Rect(van_rect.x + 2, van_rect.y + van_rect.height//2, 
+                                    van_rect.width - 4, van_rect.height//4)
+            pygame.draw.rect(surface, (180, 200, 240), side_window)
+            
+        elif vehicle.vehicle_type == VehicleType.MOTORCYCLE:
+            # Enhanced motorcycle with 3D effect
+            self._draw_3d_circle(surface, color, center, cell_size // 3)
+            
+            # Add motorcycle details
+            # Handlebars
+            pygame.draw.line(surface, (100, 100, 100),
+                           (center[0] - cell_size//4, center[1] - cell_size//6),
+                           (center[0] + cell_size//4, center[1] - cell_size//6), 3)
+            
+            # Wheels
+            wheel_color = (50, 50, 50)
+            pygame.draw.circle(surface, wheel_color, 
+                             (center[0] - cell_size//5, center[1] + cell_size//4), cell_size//8)
+            pygame.draw.circle(surface, wheel_color,
+                             (center[0] + cell_size//5, center[1] + cell_size//4), cell_size//8)
+            
+        else:  # TRUCK
+            # Enhanced truck with 3D effect
+            truck_rect = pygame.Rect(center[0] - cell_size//2, center[1] - cell_size//3,
+                                   cell_size, 2*cell_size//3)
+            self._draw_3d_rect(surface, color, truck_rect)
+            
+            # Truck cab
+            cab_rect = pygame.Rect(truck_rect.x, truck_rect.y, 
+                                 truck_rect.width//3, truck_rect.height)
+            self._draw_3d_rect(surface, tuple(c + 20 for c in color), cab_rect)
+            
+            # Windshield
+            windshield = pygame.Rect(cab_rect.x + 2, cab_rect.y + 2,
+                                   cab_rect.width - 4, cab_rect.height//2)
+            pygame.draw.rect(surface, (200, 220, 255), windshield)
+        
+        # Enhanced fuel indicator with 3D effect
+        fuel_ratio = vehicle.fuel / vehicle.max_fuel
+        fuel_bg_rect = pygame.Rect(center[0] - cell_size//3, center[1] + cell_size//2 + 2,
+                                 2*cell_size//3, 6)
+        pygame.draw.rect(surface, (100, 100, 100), fuel_bg_rect)
+        
+        fuel_color = (255, 50, 50) if fuel_ratio < 0.3 else (255, 200, 50) if fuel_ratio < 0.6 else (50, 255, 50)
+        fuel_rect = pygame.Rect(fuel_bg_rect.x + 1, fuel_bg_rect.y + 1,
+                              int((fuel_bg_rect.width - 2) * fuel_ratio), fuel_bg_rect.height - 2)
+        pygame.draw.rect(surface, fuel_color, fuel_rect)
+        
+        # Fuel indicator border
+        pygame.draw.rect(surface, (50, 50, 50), fuel_bg_rect, 1)
+    
+    def _draw_enhanced_delivery_point(self, surface, delivery, pickup_center, delivery_center, cell_size):
+        """Draw enhanced delivery points with 3D effects"""
+        urgency_colors = {
+            UrgencyLevel.STANDARD: (255, 255, 255),
+            UrgencyLevel.NORMAL: (255, 220, 100),
+            UrgencyLevel.URGENT: (255, 150, 100),
+            UrgencyLevel.CRITICAL: (255, 100, 100)
+        }
+        
+        color = urgency_colors[delivery.urgency]
+        
+        # Pickup point (3D circle with glow)
+        glow_radius = cell_size // 3
+        for i in range(glow_radius, cell_size//4, -1):
+            alpha = int(50 * (glow_radius - i) / (glow_radius - cell_size//4))
+            glow_color = (*color, alpha)
+            # Create surface for alpha blending
+            glow_surface = pygame.Surface((i*2, i*2), pygame.SRCALPHA)
+            pygame.draw.circle(glow_surface, glow_color, (i, i), i)
+            surface.blit(glow_surface, (pickup_center[0] - i, pickup_center[1] - i))
+        
+        self._draw_3d_circle(surface, color, pickup_center, cell_size // 4)
+        pygame.draw.circle(surface, (50, 50, 50), pickup_center, cell_size // 4, 2)
+        
+        # Delivery location (3D diamond with shadow)
+        diamond_size = cell_size // 4
+        diamond_points = [
+            (delivery_center[0], delivery_center[1] - diamond_size),
+            (delivery_center[0] + diamond_size, delivery_center[1]),
+            (delivery_center[0], delivery_center[1] + diamond_size),
+            (delivery_center[0] - diamond_size, delivery_center[1])
+        ]
+        
+        # Shadow
+        shadow_points = [(p[0] + 2, p[1] + 2) for p in diamond_points]
+        pygame.draw.polygon(surface, (100, 100, 100), shadow_points)
+        
+        # Main diamond with gradient effect
+        pygame.draw.polygon(surface, color, diamond_points)
+        
+        # Highlight
+        highlight_points = [
+            diamond_points[0],
+            ((diamond_points[0][0] + diamond_points[1][0]) // 2, 
+             (diamond_points[0][1] + diamond_points[1][1]) // 2),
+            delivery_center,
+            ((diamond_points[0][0] + diamond_points[3][0]) // 2,
+             (diamond_points[0][1] + diamond_points[3][1]) // 2)
+        ]
+        highlight_color = tuple(min(255, c + 60) for c in color)
+        pygame.draw.polygon(surface, highlight_color, highlight_points)
+        
+        pygame.draw.polygon(surface, (50, 50, 50), diamond_points, 2)
+    
     def render(self):
-        """Render the environment"""
+        """Render the environment with enhanced visuals"""
         if self.render_mode is None:
             return
         
@@ -616,13 +820,14 @@ class FleetManagementEnv(gym.Env):
             pygame.init()
             pygame.display.init()
             self.window = pygame.display.set_mode(self.window_size)
-            pygame.display.set_caption("Fleet Management Environment")
+            pygame.display.set_caption("Fleet Management Environment - Urban Logistics Simulator")
         
         if self.clock is None and self.render_mode == "human":
             self.clock = pygame.time.Clock()
         
         canvas = pygame.Surface(self.window_size)
-        canvas.fill((240, 240, 240))  # Light gray background
+        # Create gradient background
+        self._draw_gradient_background(canvas)
         
         # Calculate cell size for grid
         grid_width = 600
@@ -630,34 +835,42 @@ class FleetManagementEnv(gym.Env):
         grid_offset_x = 50
         grid_offset_y = 50
         
-        # Draw customer zones
+        # Draw customer zones with enhanced 3D buildings
         zone_colors = {
-            CustomerZone.RESIDENTIAL: (200, 255, 200),  # Light green
-            CustomerZone.COMMERCIAL: (200, 200, 255),   # Light blue  
-            CustomerZone.INDUSTRIAL: (255, 255, 200),   # Light yellow
-            CustomerZone.HOSPITAL: (255, 200, 200)      # Light red
+            CustomerZone.RESIDENTIAL: (120, 180, 120),  # Forest green
+            CustomerZone.COMMERCIAL: (180, 180, 80),    # Golden yellow
+            CustomerZone.INDUSTRIAL: (160, 100, 100),   # Industrial red
+            CustomerZone.HOSPITAL: (100, 140, 200)      # Medical blue
+        }
+        
+        zone_types = {
+            CustomerZone.RESIDENTIAL: "residential",
+            CustomerZone.COMMERCIAL: "commercial", 
+            CustomerZone.INDUSTRIAL: "industrial",
+            CustomerZone.HOSPITAL: "commercial"
         }
         
         for zone, positions in self.customer_zones.items():
             color = zone_colors[zone]
+            building_type = zone_types[zone]
             for pos in positions:
                 rect = pygame.Rect(
-                    grid_offset_x + pos[0] * cell_size,
-                    grid_offset_y + pos[1] * cell_size,
-                    cell_size, cell_size
+                    grid_offset_x + pos[0] * cell_size + 1,
+                    grid_offset_y + pos[1] * cell_size + 1,
+                    cell_size - 2, cell_size - 2
                 )
-                pygame.draw.rect(canvas, color, rect)
+                self._draw_building(canvas, rect, color, building_type)
         
-        # Draw grid lines
+        # Draw subtle grid lines (roads)
         for i in range(self.grid_size + 1):
-            # Vertical lines
-            pygame.draw.line(canvas, (150, 150, 150),
+            # Vertical roads
+            pygame.draw.line(canvas, (180, 180, 180),
                            (grid_offset_x + i * cell_size, grid_offset_y),
-                           (grid_offset_x + i * cell_size, grid_offset_y + grid_width))
-            # Horizontal lines  
-            pygame.draw.line(canvas, (150, 150, 150),
+                           (grid_offset_x + i * cell_size, grid_offset_y + grid_width), 1)
+            # Horizontal roads
+            pygame.draw.line(canvas, (180, 180, 180),
                            (grid_offset_x, grid_offset_y + i * cell_size),
-                           (grid_offset_x + grid_width, grid_offset_y + i * cell_size))
+                           (grid_offset_x + grid_width, grid_offset_y + i * cell_size), 1)
         
         # Draw traffic congestion
         for ty in range(5):
@@ -684,31 +897,48 @@ class FleetManagementEnv(gym.Env):
                                 s.fill(color[:3])
                                 canvas.blit(s, rect)
         
-        # Draw fuel stations
+        # Draw enhanced fuel stations
         for station in self.fuel_stations:
             center = (
                 grid_offset_x + station[0] * cell_size + cell_size // 2,
                 grid_offset_y + station[1] * cell_size + cell_size // 2
             )
-            pygame.draw.circle(canvas, (0, 100, 0), center, cell_size // 3)
-            pygame.draw.circle(canvas, (255, 255, 255), center, cell_size // 4)
+            
+            # Station base (3D effect)
+            station_rect = pygame.Rect(center[0] - cell_size//3, center[1] - cell_size//3,
+                                     2*cell_size//3, 2*cell_size//3)
+            self._draw_3d_rect(canvas, (40, 120, 40), station_rect)
+            
+            # Fuel pump
+            pump_rect = pygame.Rect(center[0] - cell_size//6, center[1] - cell_size//6,
+                                  cell_size//3, cell_size//3)
+            self._draw_3d_rect(canvas, (200, 200, 200), pump_rect)
+            
+            # Fuel symbol
+            pygame.draw.circle(canvas, (255, 255, 255), center, cell_size//8)
+            pygame.draw.circle(canvas, (50, 150, 50), center, cell_size//10)
         
-        # Draw depot
+        # Draw enhanced depot
         depot_rect = pygame.Rect(
-            grid_offset_x + self.depot_position[0] * cell_size,
-            grid_offset_y + self.depot_position[1] * cell_size,
-            cell_size, cell_size
+            grid_offset_x + self.depot_position[0] * cell_size + 1,
+            grid_offset_y + self.depot_position[1] * cell_size + 1,
+            cell_size - 2, cell_size - 2
         )
-        pygame.draw.rect(canvas, (100, 100, 100), depot_rect)
+        self._draw_3d_rect(canvas, (80, 80, 120), depot_rect)
         
-        # Draw delivery requests
-        urgency_colors = {
-            UrgencyLevel.STANDARD: (255, 255, 255),
-            UrgencyLevel.NORMAL: (255, 255, 0),
-            UrgencyLevel.URGENT: (255, 165, 0),
-            UrgencyLevel.CRITICAL: (255, 0, 0)
-        }
+        # Add depot details
+        # Loading dock
+        dock_rect = pygame.Rect(depot_rect.x + 2, depot_rect.y + depot_rect.height//2,
+                              depot_rect.width - 4, depot_rect.height//4)
+        pygame.draw.rect(canvas, (60, 60, 100), dock_rect)
         
+        # Depot sign
+        sign_rect = pygame.Rect(depot_rect.x + depot_rect.width//4, depot_rect.y + 2,
+                              depot_rect.width//2, depot_rect.height//4)
+        pygame.draw.rect(canvas, (255, 255, 255), sign_rect)
+        pygame.draw.rect(canvas, (0, 0, 0), sign_rect, 1)
+        
+        # Draw enhanced delivery requests
         for delivery in self.delivery_requests:
             if not delivery.completed:
                 # Pickup location (circle)
@@ -716,80 +946,126 @@ class FleetManagementEnv(gym.Env):
                     grid_offset_x + delivery.pickup_location[0] * cell_size + cell_size // 2,
                     grid_offset_y + delivery.pickup_location[1] * cell_size + cell_size // 2
                 )
-                color = urgency_colors[delivery.urgency]
-                pygame.draw.circle(canvas, color, pickup_center, cell_size // 4)
-                pygame.draw.circle(canvas, (0, 0, 0), pickup_center, cell_size // 4, 2)
                 
                 # Delivery location (diamond)
                 delivery_center = (
                     grid_offset_x + delivery.delivery_location[0] * cell_size + cell_size // 2,
                     grid_offset_y + delivery.delivery_location[1] * cell_size + cell_size // 2
                 )
-                diamond_points = [
-                    (delivery_center[0], delivery_center[1] - cell_size // 4),
-                    (delivery_center[0] + cell_size // 4, delivery_center[1]),
-                    (delivery_center[0], delivery_center[1] + cell_size // 4),
-                    (delivery_center[0] - cell_size // 4, delivery_center[1])
-                ]
-                pygame.draw.polygon(canvas, color, diamond_points)
-                pygame.draw.polygon(canvas, (0, 0, 0), diamond_points, 2)
+                
+                self._draw_enhanced_delivery_point(canvas, delivery, pickup_center, delivery_center, cell_size)
         
-        # Draw vehicles
-        vehicle_colors = {
-            VehicleType.VAN: (0, 0, 255),        # Blue
-            VehicleType.MOTORCYCLE: (0, 255, 0), # Green  
-            VehicleType.TRUCK: (255, 0, 0)       # Red
-        }
-        
+        # Draw enhanced vehicles
         for i, vehicle in enumerate(self.vehicles):
             center = (
                 grid_offset_x + vehicle.position[0] * cell_size + cell_size // 2,
                 grid_offset_y + vehicle.position[1] * cell_size + cell_size // 2
             )
-            color = vehicle_colors[vehicle.vehicle_type]
             
-            if vehicle.vehicle_type == VehicleType.VAN:
-                # Square for van
-                rect = pygame.Rect(center[0] - cell_size//3, center[1] - cell_size//3, 
-                                 2*cell_size//3, 2*cell_size//3)
-                pygame.draw.rect(canvas, color, rect)
-            elif vehicle.vehicle_type == VehicleType.MOTORCYCLE:
-                # Circle for motorcycle
-                pygame.draw.circle(canvas, color, center, cell_size // 3)
-            else:  # TRUCK
-                # Rectangle for truck
-                rect = pygame.Rect(center[0] - cell_size//2, center[1] - cell_size//4,
-                                 cell_size, cell_size//2)
-                pygame.draw.rect(canvas, color, rect)
-            
-            # Fuel indicator
-            fuel_ratio = vehicle.fuel / vehicle.max_fuel
-            fuel_color = (255, 0, 0) if fuel_ratio < 0.3 else (255, 255, 0) if fuel_ratio < 0.6 else (0, 255, 0)
-            fuel_rect = pygame.Rect(center[0] - cell_size//3, center[1] + cell_size//2,
-                                  int(2*cell_size//3 * fuel_ratio), 4)
-            pygame.draw.rect(canvas, fuel_color, fuel_rect)
+            self._draw_enhanced_vehicle(canvas, vehicle, center, cell_size)
         
-        # Draw metrics panel
-        panel_x = grid_width + 100
-        panel_y = 50
-        font = pygame.font.Font(None, 24)
+        # Draw enhanced metrics panel
+        panel_x = grid_width + 80
+        panel_y = 30
+        panel_width = 300
+        panel_height = 500
         
+        # Panel background with 3D effect
+        panel_rect = pygame.Rect(panel_x, panel_y, panel_width, panel_height)
+        self._draw_3d_rect(canvas, (240, 240, 250), panel_rect)
+        
+        # Title
+        title_font = pygame.font.Font(None, 28)
+        title_text = title_font.render("Fleet Management", True, (50, 50, 100))
+        canvas.blit(title_text, (panel_x + 10, panel_y + 10))
+        
+        # Separator line
+        pygame.draw.line(canvas, (150, 150, 150), 
+                        (panel_x + 10, panel_y + 40), 
+                        (panel_x + panel_width - 10, panel_y + 40), 2)
+        
+        # Metrics
+        font = pygame.font.Font(None, 22)
+        small_font = pygame.font.Font(None, 18)
+        
+        y_offset = 55
+        
+        # Progress bar for timestep
+        progress_ratio = self.timestep / self.max_timesteps
+        progress_rect = pygame.Rect(panel_x + 10, panel_y + y_offset, panel_width - 20, 15)
+        pygame.draw.rect(canvas, (200, 200, 200), progress_rect)
+        progress_fill = pygame.Rect(panel_x + 10, panel_y + y_offset, 
+                                  int((panel_width - 20) * progress_ratio), 15)
+        pygame.draw.rect(canvas, (100, 200, 100), progress_fill)
+        pygame.draw.rect(canvas, (100, 100, 100), progress_rect, 1)
+        
+        timestep_text = small_font.render(f"Timestep: {self.timestep}/{self.max_timesteps}", True, (50, 50, 50))
+        canvas.blit(timestep_text, (panel_x + 10, panel_y + y_offset + 20))
+        
+        y_offset += 50
+        
+        # Key metrics
         metrics = [
-            f"Timestep: {self.timestep}/{self.max_timesteps}",
             f"Total Reward: {self.total_reward:.1f}",
             f"Deliveries: {self.completed_deliveries}/{len(self.delivery_requests)}",
-            f"Weather Effect: {self.weather_effect:.1f}x",
-            "",
-            "Vehicle Status:",
+            f"Weather: {self.weather_effect:.1f}x",
         ]
         
-        for i, vehicle in enumerate(self.vehicles):
-            metrics.append(f"{vehicle.vehicle_type.value.title()}: Fuel {vehicle.fuel:.1f}/{vehicle.max_fuel}")
-            metrics.append(f"  Pos: {vehicle.position}, Cargo: {vehicle.cargo_used}/{vehicle.capacity}")
+        for metric in metrics:
+            text = font.render(metric, True, (50, 50, 50))
+            canvas.blit(text, (panel_x + 10, panel_y + y_offset))
+            y_offset += 25
         
-        for i, metric in enumerate(metrics):
-            text = font.render(metric, True, (0, 0, 0))
-            canvas.blit(text, (panel_x, panel_y + i * 25))
+        y_offset += 10
+        
+        # Vehicle status section
+        vehicle_title = font.render("Vehicle Status:", True, (50, 50, 100))
+        canvas.blit(vehicle_title, (panel_x + 10, panel_y + y_offset))
+        y_offset += 30
+        
+        for i, vehicle in enumerate(self.vehicles):
+            # Vehicle type with color indicator
+            vehicle_color = {
+                VehicleType.VAN: (30, 100, 200),
+                VehicleType.MOTORCYCLE: (50, 150, 50),
+                VehicleType.TRUCK: (180, 50, 50)
+            }[vehicle.vehicle_type]
+            
+            # Color indicator
+            color_rect = pygame.Rect(panel_x + 10, panel_y + y_offset, 15, 15)
+            pygame.draw.rect(canvas, vehicle_color, color_rect)
+            pygame.draw.rect(canvas, (100, 100, 100), color_rect, 1)
+            
+            # Vehicle name
+            vehicle_text = font.render(f"{vehicle.vehicle_type.value.title()}", True, (50, 50, 50))
+            canvas.blit(vehicle_text, (panel_x + 30, panel_y + y_offset))
+            
+            y_offset += 20
+            
+            # Fuel bar
+            fuel_ratio = vehicle.fuel / vehicle.max_fuel
+            fuel_bg_rect = pygame.Rect(panel_x + 15, panel_y + y_offset, 150, 8)
+            pygame.draw.rect(canvas, (200, 200, 200), fuel_bg_rect)
+            
+            fuel_color = (255, 50, 50) if fuel_ratio < 0.3 else (255, 200, 50) if fuel_ratio < 0.6 else (50, 255, 50)
+            fuel_fill_rect = pygame.Rect(panel_x + 15, panel_y + y_offset, 
+                                       int(150 * fuel_ratio), 8)
+            pygame.draw.rect(canvas, fuel_color, fuel_fill_rect)
+            pygame.draw.rect(canvas, (100, 100, 100), fuel_bg_rect, 1)
+            
+            fuel_text = small_font.render(f"Fuel: {vehicle.fuel:.1f}/{vehicle.max_fuel}", True, (80, 80, 80))
+            canvas.blit(fuel_text, (panel_x + 170, panel_y + y_offset - 2))
+            
+            y_offset += 15
+            
+            # Position and cargo
+            pos_text = small_font.render(f"Pos: ({vehicle.position[0]}, {vehicle.position[1]})", True, (80, 80, 80))
+            canvas.blit(pos_text, (panel_x + 15, panel_y + y_offset))
+            
+            cargo_text = small_font.render(f"Cargo: {vehicle.cargo_used}/{vehicle.capacity}", True, (80, 80, 80))
+            canvas.blit(cargo_text, (panel_x + 150, panel_y + y_offset))
+            
+            y_offset += 25
         
         if self.render_mode == "human":
             self.window.blit(canvas, canvas.get_rect())

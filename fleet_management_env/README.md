@@ -299,7 +299,7 @@ config = {
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our contributing guidelines:
+I welcome contributions! Here are the guidelines:
 
 1. Fork the repository
 2. Create feature branch (`git checkout -b feature/amazing-feature`)
@@ -317,7 +317,7 @@ cd fleet_management_env
 pip install -e ".[dev]"
 
 # Run tests
-pytest tests/
+python -m fleet_management_env.test_fleet
 
 # Run linting
 black fleet_management_env/
@@ -326,7 +326,7 @@ flake8 fleet_management_env/
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is open source and available under a simple open source license. Feel free to use, modify, and distribute as needed.
 
 ## 📚 Citation
 
@@ -335,7 +335,7 @@ If you use this environment in your research, please cite:
 ```bibtex
 @misc{fleet_management_env,
   title={Fleet Management Environment: A Multi-Agent Reinforcement Learning Environment for Urban Logistics},
-  author={Fleet Management Environment Team},
+  author={Fleet Management Environment},
   year={2024},
   url={https://github.com/example/fleet_management_env}
 }
@@ -343,9 +343,8 @@ If you use this environment in your research, please cite:
 
 ## 🆘 Support
 
-- **Documentation**: [Read the Docs](https://fleet-management-env.readthedocs.io/)
 - **Issues**: [GitHub Issues](https://github.com/example/fleet_management_env/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/example/fleet_management_env/discussions)
+- **Discussions**: [GitHub Discussions](https://github.com/example/fleet_management_env/issues)
 
 ## 🗺️ Roadmap
 
