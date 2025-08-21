@@ -1,3 +1,8 @@
+
+<img width="1117" height="662" alt="Crypto" src="https://github.com/user-attachments/assets/c00a20df-4360-467e-b9a7-31fdaf864836" />
+
+
+
 # Crypto Trading Gymnasium Environment
 
 A comprehensive cryptocurrency trading environment built with OpenAI Gymnasium, featuring realistic market simulation, technical indicators, and advanced trading mechanics.
