@@ -1,3 +1,8 @@
+
+<img width="1487" height="1017" alt="Space_00" src="https://github.com/user-attachments/assets/7b338024-69b7-48e8-b359-904b3f0071df" />
+
+
+
 # Space Station Environment
 
 A comprehensive reinforcement learning environment that simulates space station life support management with realistic orbital mechanics, system interdependencies, and emergency scenarios.
