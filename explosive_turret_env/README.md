@@ -1,7 +1,7 @@
 
 
+<img width="981" height="773" alt="image" src="https://github.com/user-attachments/assets/261a4b56-a2b4-4080-983b-2025dd27e192" />
 
-![Explosive_Turret_GIF](https://github.com/user-attachments/assets/cceadaad-50df-4a2b-87ef-af660912b84c)
 
 # Explosive Turret Environment
 
