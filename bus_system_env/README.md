@@ -1,12 +1,9 @@
 
 ![BusEnvGif](https://github.com/user-attachments/assets/735de23e-43e5-4eb4-bb08-f1965dd209f7)
 
-
-
-
 # Bus System Environment
 
-A custom OpenAI Gymnasium environment simulating an urban bus system with multiple buses operating on a circular route.
+A Gymnasium environment for urban bus system simulation with multiple buses operating on a circular route and dynamic passenger management.
 
 ## Features
 
@@ -17,14 +14,21 @@ A custom OpenAI Gymnasium environment simulating an urban bus system with multip
 - **Pygame visualization** for demo purposes
 - **Gymnasium-compatible** interface
 
-## Installation
+## Environment Specifications
 
+- **Action Space**: 4 discrete actions (dwell time 0-10 timesteps per bus)
+- **Observation Space**: Bus positions, states, capacities, passenger data
+- **Reward System**: Passenger delivery + waiting penalties + onboard costs
+- **Episode Length**: 500 timesteps (configurable)
+
+## Quick Start
+
+### Installation
 ```bash
 pip install gymnasium numpy pygame
 ```
 
-## Quick Start
-
+### Basic Usage
 ```python
 from bus_system_env import BusSystemEnv
 
@@ -34,9 +38,9 @@ obs, info = env.reset()
 
 # Run simulation
 for step in range(100):
-    action = env.action_space.sample()  # Random agent
+    action = env.action_space.sample()
     obs, reward, terminated, truncated, info = env.step(action)
-    env.render()  # Visualize if enabled
+    env.render()
     
     if terminated or truncated:
         break
@@ -44,23 +48,16 @@ for step in range(100):
 env.close()
 ```
 
-## Environment Details
+### Testing
+```bash
+python test_env.py
+```
 
-### Action Space
-- **4 actions** (one per bus): dwell time at current stop (0-10 timesteps)
+## Reward System
 
-### Observation Space
-- Bus positions, states, capacities, passenger destinations
-- Stop waiting counts and destination distributions
-- Global timestep and passenger statistics
-
-### Reward System
-- **+5.0** per passenger delivered
-- **-1.0** per waiting passenger per timestep
-- **-0.5** per onboard passenger per timestep
-
-### Episode Termination
-- Ends after 500 timesteps (configurable)
+- **+5.0**: Per passenger delivered
+- **-1.0**: Per waiting passenger per timestep
+- **-0.5**: Per onboard passenger per timestep
 
 ## Visualization
 
@@ -73,18 +70,25 @@ env = BusSystemEnv(enable_visualization=True, demo_speed=0.5)
 - **SPACE**: Pause/Resume
 - **ESC**: Exit
 
-## Testing
+## Project Structure
 
-```bash
-python bus_system_env/test_env.py
-```
+- `environment.py` - Core environment implementation
+- `pygame_visualizer.py` - Real-time visualization
+- `utils.py` - Utility functions
+- `config.py` - Configuration parameters
+- `test_env.py` - Environment testing
 
-## Author
+## Requirements
 
-**Hasnain Fareed**  
-Email: Hasnainfarid7@yahoo.com  
-GitHub: [@hasnainfarid](https://github.com/hasnainfarid)
+- Python 3.7+
+- gymnasium>=0.28.0
+- numpy>=1.19.0
+- pygame>=2.0.0
 
 ## License
 
-MIT License - See [LICENSE](LICENSE) file for details. 
+MIT License - see LICENSE file for details.
+
+## Author
+
+**Hasnain Fareed** - 2025 
