@@ -1,6 +1,6 @@
 
+<img width="1008" height="677" alt="image" src="https://github.com/user-attachments/assets/fb1ccd32-68f8-40cb-b84d-fba0fc3641c5" />
 
-![ParkingLot_SR](https://github.com/user-attachments/assets/8fbe470d-6743-4781-a689-06074b5ef40f)
 
 # Smart Parking Environment
 
