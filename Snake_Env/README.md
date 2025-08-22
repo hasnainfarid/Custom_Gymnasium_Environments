@@ -1,6 +1,12 @@
-# Snake Environment
+# Snake RL Environment
 
-A Gymnasium environment for the classic Snake game, designed for reinforcement learning experiments with customizable grid sizes and multiple render modes.
+A custom gymnasium environment for the classic Snake game, designed for reinforcement learning experiments.
+
+## Author
+
+**Hasnain Fareed**  
+Email: hasnainfarid7@yahoo.com  
+Year: 2025
 
 ## Features
 
@@ -10,21 +16,25 @@ A Gymnasium environment for the classic Snake game, designed for reinforcement l
 - **Multiple Render Modes**: Human visualization and RGB array output
 - **RL-Ready**: Proper observation and action spaces for RL algorithms
 
-## Environment Specifications
+## Installation
 
-- **Action Space**: 4 discrete actions (Up, Right, Down, Left)
-- **Observation Space**: 2D grid (0=empty, 1=snake, 2=food)
-- **Reward System**: +10 for food, -10 for collision, 0 for movement
-- **Grid Size**: Configurable (default: 20x20)
+1. Clone the repository:
+```bash
+git clone <this-repo-url>
+cd snake_env
+```
 
-## Quick Start
-
-### Installation
+2. Install the required dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
+3. The environment will be automatically registered with gymnasium when imported.
+
+## Usage
+
 ### Basic Usage
+
 ```python
 import gymnasium as gym
 from snake_env import SnakeEnv
@@ -32,12 +42,17 @@ from snake_env import SnakeEnv
 # Create environment
 env = SnakeEnv(render_mode="human", grid_size=20)
 
-# Reset and run
+# Reset environment
 observation, info = env.reset()
-action = env.action_space.sample()
-observation, reward, terminated, truncated, info = env.step(action)
 
+# Take actions
+action = env.action_space.sample()  # Random action
+observation, reward, done, truncated, info = env.step(action)
+
+# Render
 env.render()
+
+# Close environment
 env.close()
 ```
 
@@ -48,40 +63,73 @@ env.close()
 - `2`: Move Down
 - `3`: Move Left
 
+### Observation Space
+
+The observation is a 2D grid where:
+- `0`: Empty cell
+- `1`: Snake segment
+- `2`: Food
+
 ### Rewards
 
-- **+10**: Eating food
-- **-10**: Hitting wall or self
-- **0**: Moving without eating
+- `+10`: Eating food
+- `-10`: Hitting wall or self
+- `0`: Moving without eating
 
-### Testing
+### Example Scripts
+
+Run the example script to test the environment:
+
 ```bash
 python example.py
 ```
 
-### Training
+This will give you options to:
+1. Test with a random agent
+2. Test with manual keyboard control
+
+## Training with RL Algorithms
+
+The environment is compatible with popular RL libraries like Stable Baselines3, RLlib, and others.
+
+### Example with Stable Baselines3
+
+```python
+from stable_baselines3 import PPO
+from snake_env import SnakeEnv
+
+env = SnakeEnv()
+model = PPO("MlpPolicy", env, verbose=1)
+model.learn(total_timesteps=10000)
+```
+
+### Training with Q-Learning
+
 ```bash
 python train.py
 ```
 
-## Project Structure
+This will train a simple Q-learning agent and show the results.
 
-- `snake_env.py` - Core environment implementation
-- `example.py` - Usage examples and testing
-- `train.py` - Training script
-- `test_visualization.py` - Visualization testing
+## Environment Parameters
 
-## Requirements
+- `render_mode`: "human" for pygame visualization, "rgb_array" for array output, None for no rendering
+- `grid_size`: Size of the game grid (default: 20)
 
-- Python 3.7+
-- gymnasium>=0.28.0
-- pygame>=2.0.0
-- numpy>=1.19.0
+## Game Rules
+
+1. The snake starts at the center of the grid
+2. Control the snake to eat red food squares
+3. The snake grows longer when it eats food
+4. Game ends if the snake hits the wall or itself
+5. Maximum episode length is 1000 steps
 
 ## License
 
-MIT License - see LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Author
+## Contact
 
-**Hasnain Fareed** - 2025 
+For questions or contributions, please contact:
+- **Hasnain Fareed**
+- Email: hasnainfarid7@yahoo.com 
