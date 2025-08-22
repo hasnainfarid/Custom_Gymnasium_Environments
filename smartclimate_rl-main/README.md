@@ -1,4 +1,5 @@
-![ezgif-347a404b25dd75](https://github.com/user-attachments/assets/665bb9c4-a11b-44d7-ac1a-a9bdc57e646b)
+<img width="621" height="533" alt="image" src="https://github.com/user-attachments/assets/3c9dfe03-24ff-43ce-b565-01604d2f0360" />
+
 
 # SmartClimate Environment
 
