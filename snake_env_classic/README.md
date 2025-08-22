@@ -1,3 +1,7 @@
+
+<img width="368" height="411" alt="Snake_00" src="https://github.com/user-attachments/assets/1c5367a0-0cb4-43d2-8197-437ea5c5b09b" />
+
+
 # Snake Environment Classic
 
 A Gymnasium environment for the classic Snake game, designed for reinforcement learning experiments with customizable grid sizes and multiple render modes.
