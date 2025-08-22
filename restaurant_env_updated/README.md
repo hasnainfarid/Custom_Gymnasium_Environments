@@ -1,6 +1,7 @@
 
 
-![RestaurantEnv](https://github.com/user-attachments/assets/7372a071-0fc2-45ab-b44b-636304d4380e)
+<img width="1007" height="686" alt="Res_00" src="https://github.com/user-attachments/assets/ddb41a0b-5f59-4989-a7de-1f8f48169388" />
+
 
 # Restaurant Management Environment
 
