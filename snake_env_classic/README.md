@@ -1,4 +1,4 @@
-# Snake Environment
+# Snake Environment Classic
 
 A Gymnasium environment for the classic Snake game, designed for reinforcement learning experiments with customizable grid sizes and multiple render modes.
 
@@ -27,10 +27,10 @@ pip install -r requirements.txt
 ### Basic Usage
 ```python
 import gymnasium as gym
-from snake_env import SnakeEnv
+from snake_env import SnakeEnvClassic
 
 # Create environment
-env = SnakeEnv(render_mode="human", grid_size=20)
+env = SnakeEnvClassic(render_mode="human", grid_size=20)
 
 # Reset and run
 observation, info = env.reset()
@@ -39,6 +39,12 @@ observation, reward, terminated, truncated, info = env.step(action)
 
 env.render()
 env.close()
+```
+
+### Environment Registration
+```python
+import gymnasium as gym
+env = gym.make('snake_env_classic-v0', render_mode="human")
 ```
 
 ### Action Space

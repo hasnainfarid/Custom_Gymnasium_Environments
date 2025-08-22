@@ -4,7 +4,7 @@ Simple test script to verify the snake environment visualization works.
 """
 
 import time
-from snake_env import SnakeEnv
+from snake_env import SnakeEnvClassic
 
 def test_visualization():
     """Test the pygame visualization."""
@@ -14,7 +14,7 @@ def test_visualization():
     print("Close the window to exit.")
     
     # Create environment with human rendering
-    env = SnakeEnv(render_mode="human", grid_size=15)
+    env = SnakeEnvClassic(render_mode="human", grid_size=15)
     
     # Reset environment
     observation, info = env.reset()

@@ -1,6 +1,6 @@
 import gymnasium as gym
 import numpy as np
-from snake_env import SnakeEnv
+from snake_env import SnakeEnvClassic
 import time
 
 class SimpleQLearningAgent:
@@ -73,7 +73,7 @@ class SimpleQLearningAgent:
 
 def train_agent(episodes=1000, render=False):
     """Train a Q-learning agent on the snake environment."""
-    env = SnakeEnv(render_mode="human" if render else None)
+    env = SnakeEnvClassic(render_mode="human" if render else None)
     agent = SimpleQLearningAgent(
         state_size=env.observation_space.shape[0] * env.observation_space.shape[1],
         action_size=env.action_space.n,
@@ -112,7 +112,7 @@ def train_agent(episodes=1000, render=False):
 
 def test_trained_agent(agent, episodes=5):
     """Test the trained agent."""
-    env = SnakeEnv(render_mode="human")
+    env = SnakeEnvClassic(render_mode="human")
     
     for episode in range(episodes):
         observation, info = env.reset()

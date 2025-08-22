@@ -6,7 +6,7 @@ from gymnasium import spaces
 from typing import Tuple, Optional, Dict, Any
 
 
-class SnakeEnv(gym.Env):
+class SnakeEnvClassic(gym.Env):
     """
     A Snake game environment for reinforcement learning.
     

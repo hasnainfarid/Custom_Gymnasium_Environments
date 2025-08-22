@@ -1,11 +1,11 @@
 import gymnasium as gym
 import numpy as np
 import time
-from snake_env import SnakeEnv
+from snake_env import SnakeEnvClassic
 
 def test_random_agent():
     """Test the environment with a random agent."""
-    env = SnakeEnv(render_mode="human")
+    env = SnakeEnvClassic(render_mode="human")
     observation, info = env.reset()
     
     total_reward = 0
@@ -39,7 +39,7 @@ def test_random_agent():
 
 def test_manual_control():
     """Test the environment with manual keyboard control."""
-    env = SnakeEnv(render_mode="human")
+    env = SnakeEnvClassic(render_mode="human")
     observation, info = env.reset()
     
     print("Manual control mode:")
