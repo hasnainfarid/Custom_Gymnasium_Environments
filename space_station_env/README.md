@@ -1,11 +1,9 @@
 
 <img width="1487" height="1017" alt="Space_00" src="https://github.com/user-attachments/assets/7b338024-69b7-48e8-b359-904b3f0071df" />
 
-
-
 # Space Station Environment
 
-A comprehensive reinforcement learning environment that simulates space station life support management with realistic orbital mechanics, system interdependencies, and emergency scenarios.
+A Gymnasium environment for space station life support management simulation with realistic orbital mechanics and system interdependencies.
 
 ## Features
 
@@ -20,24 +18,17 @@ A comprehensive reinforcement learning environment that simulates space station 
 
 - **Observation Space**: 110-dimensional state representation
 - **Action Space**: 40 discrete actions for system control
-- **Reward Structure**: Comprehensive mission outcome and efficiency rewards
-
-## Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/hasnainfareed/space-station-env.git
-cd space-station-env
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Install the package
-pip install -e .
-```
+- **Reward Structure**: Mission outcome and efficiency rewards
 
 ## Quick Start
 
+### Installation
+```bash
+pip install -r requirements.txt
+pip install -e .
+```
+
+### Basic Usage
 ```python
 import gymnasium as gym
 from space_station_env import SpaceStationEnv
@@ -45,14 +36,12 @@ from space_station_env import SpaceStationEnv
 # Create environment
 env = SpaceStationEnv(render_mode="human")
 
-# Reset environment
+# Reset and run
 obs, info = env.reset()
-
-# Run simulation
 for _ in range(1000):
-    action = env.action_space.sample()  # Random action
+    action = env.action_space.sample()
     obs, reward, terminated, truncated, info = env.step(action)
-    env.render()  # Visualize
+    env.render()
     
     if terminated or truncated:
         break
@@ -60,31 +49,23 @@ for _ in range(1000):
 env.close()
 ```
 
-## Testing
-
-Run the comprehensive test suite with visualization:
-
+### Testing
 ```bash
 python test_station.py
 ```
 
-This will test 6 emergency scenarios:
-- Normal Operations
-- Power Failure
-- Atmospheric Leak
-- Medical Emergency
-- Solar Storm
-- Cascade Failure
+Tests 6 emergency scenarios: Normal Operations, Power Failure, Atmospheric Leak, Medical Emergency, Solar Storm, and Cascade Failure.
 
-## Dependencies
+## Requirements
 
+- Python 3.7+
 - gymnasium>=0.29.0
 - numpy>=1.24.0
 - pygame>=2.5.0
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) file for details.
+MIT License - see LICENSE file for details.
 
 ## Author
 

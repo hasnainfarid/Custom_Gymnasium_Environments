@@ -1,10 +1,9 @@
 
 <img width="1488" height="783" alt="Manufacturing_00" src="https://github.com/user-attachments/assets/b271604c-971e-41ab-bb47-3c6f95ba8bde" />
 
-
 # Smart Manufacturing Environment
 
-A comprehensive reinforcement learning environment that simulates a realistic smart manufacturing facility with production stations, quality control, and predictive maintenance capabilities.
+A Gymnasium environment for smart manufacturing facility simulation with production stations, quality control, and predictive maintenance capabilities.
 
 ## Features
 
@@ -20,24 +19,17 @@ A comprehensive reinforcement learning environment that simulates a realistic sm
 
 - **Observation Space**: 73-dimensional state representation
 - **Action Space**: 25 discrete actions for production control
-- **Reward Structure**: Comprehensive production optimization rewards
-
-## Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/hasnainfareed/smart_manufacturing_env.git
-cd smart_manufacturing_env
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Install the package
-pip install -e .
-```
+- **Reward Structure**: Production optimization rewards
 
 ## Quick Start
 
+### Installation
+```bash
+pip install -r requirements.txt
+pip install -e .
+```
+
+### Basic Usage
 ```python
 import gymnasium as gym
 from smart_manufacturing_env import SmartManufacturingEnv
@@ -45,14 +37,12 @@ from smart_manufacturing_env import SmartManufacturingEnv
 # Create environment
 env = SmartManufacturingEnv(render_mode="human")
 
-# Reset environment
+# Reset and run
 obs, info = env.reset()
-
-# Run simulation
 for _ in range(1000):
-    action = env.action_space.sample()  # Random action
+    action = env.action_space.sample()
     obs, reward, terminated, truncated, info = env.step(action)
-    env.render()  # Visualize
+    env.render()
     
     if terminated or truncated:
         break
@@ -60,22 +50,16 @@ for _ in range(1000):
 env.close()
 ```
 
-## Testing
-
-Run the comprehensive test suite with visualization:
-
+### Testing
 ```bash
 python test_manufacturing.py
 ```
 
-This will test 4 scenarios:
-- Normal Production
-- High Demand  
-- Frequent Breakdowns
-- Quality Crisis
+Tests 4 scenarios: Normal Production, High Demand, Frequent Breakdowns, and Quality Crisis.
 
-## Dependencies
+## Requirements
 
+- Python 3.7+
 - gymnasium>=0.29.0
 - numpy>=1.19.0
 - pygame>=2.0.0
@@ -83,7 +67,7 @@ This will test 4 scenarios:
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) file for details.
+MIT License - see LICENSE file for details.
 
 ## Author
 

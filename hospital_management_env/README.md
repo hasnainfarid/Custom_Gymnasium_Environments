@@ -1,11 +1,9 @@
 
 <img width="1240" height="1002" alt="Hospital_00" src="https://github.com/user-attachments/assets/afd48e39-05b8-4e94-9364-a437201ce20c" />
 
-
-
 # Hospital Management Environment
 
-A comprehensive reinforcement learning environment that simulates realistic hospital operations with patient management, resource allocation, and emergency response capabilities.
+A Gymnasium environment for hospital operations simulation with patient management, resource allocation, and emergency response capabilities.
 
 ## Features
 
@@ -21,24 +19,17 @@ A comprehensive reinforcement learning environment that simulates realistic hosp
 
 - **Observation Space**: 295-dimensional state representation
 - **Action Space**: 35 discrete actions for hospital management
-- **Reward Structure**: Comprehensive patient outcome and efficiency rewards
-
-## Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/hasnainfareed/hospital-management-env.git
-cd hospital-management-env
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Install the package
-pip install -e .
-```
+- **Reward Structure**: Patient outcome and efficiency rewards
 
 ## Quick Start
 
+### Installation
+```bash
+pip install -r requirements.txt
+pip install -e .
+```
+
+### Basic Usage
 ```python
 import gymnasium as gym
 from hospital_management_env import HospitalManagementEnv
@@ -46,14 +37,12 @@ from hospital_management_env import HospitalManagementEnv
 # Create environment
 env = HospitalManagementEnv(render_mode="human")
 
-# Reset environment
+# Reset and run
 obs, info = env.reset()
-
-# Run simulation
 for _ in range(1000):
-    action = env.action_space.sample()  # Random action
+    action = env.action_space.sample()
     obs, reward, terminated, truncated, info = env.step(action)
-    env.render()  # Visualize
+    env.render()
     
     if terminated or truncated:
         break
@@ -61,22 +50,16 @@ for _ in range(1000):
 env.close()
 ```
 
-## Testing
-
-Run the comprehensive test suite with visualization:
-
+### Testing
 ```bash
 python test_hospital.py
 ```
 
-This will test various hospital scenarios including:
-- Normal Operations
-- Emergency Response
-- Resource Shortages
-- Mass Casualty Events
+Tests various hospital scenarios: Normal Operations, Emergency Response, Resource Shortages, and Mass Casualty Events.
 
-## Dependencies
+## Requirements
 
+- Python 3.7+
 - gymnasium>=0.28.0
 - numpy>=1.21.0
 - pygame>=2.1.0
@@ -84,7 +67,7 @@ This will test various hospital scenarios including:
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) file for details.
+MIT License - see LICENSE file for details.
 
 ## Author
 
