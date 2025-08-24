@@ -1,7 +1,6 @@
 
 
-![Emergency](https://github.com/user-attachments/assets/7a28b4ef-0e3c-4c6d-8f12-6974bb5fe7be)
-
+<img width="970" height="675" alt="image" src="https://github.com/user-attachments/assets/8d6d4af2-33c0-44ec-97ce-34d5d71f9fc9" />
 
 
 # Emergency Response Environment 🚨
