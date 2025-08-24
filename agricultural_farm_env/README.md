@@ -1,3 +1,10 @@
+[GIF loading takes some time]
+
+
+![Farm](https://github.com/user-attachments/assets/faebbc91-e3d0-4488-b8c1-ec794a8ca9eb)
+
+
+
 # Agricultural Farm Management Environment
 
 A comprehensive agricultural farm management environment for reinforcement learning, built on OpenAI Gymnasium. This environment simulates realistic farming operations including crop management, weather systems, market dynamics, and sustainability tracking.
