@@ -1,3 +1,10 @@
+[GIF loading takes some time]
+
+![Airline](https://github.com/user-attachments/assets/08460220-b0d9-462b-86bf-2653a850ec34)
+
+
+
+
 # Airline Operations Environment
 
 A comprehensive Gymnasium environment for simulating airline operations management with a hub-and-spoke network. This environment provides a realistic simulation of airline operations including flight scheduling, crew management, weather disruptions, and financial optimization.
