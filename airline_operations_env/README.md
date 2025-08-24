@@ -1,4 +1,3 @@
-[GIF loading takes some time]
 
 ![Airline](https://github.com/user-attachments/assets/08460220-b0d9-462b-86bf-2653a850ec34)
 
