@@ -1,0 +1,467 @@
+Metadata-Version: 2.4
+Name: emergency_response_env
+Version: 1.0.0
+Summary: A comprehensive emergency response coordination environment for reinforcement learning
+Home-page: 
+Author: Hasnain Fareed
+Author-email: 
+License: MIT
+Project-URL: Bug Reports, 
+Project-URL: Source, 
+Project-URL: Documentation, 
+Keywords: reinforcement learning,emergency response,disaster management,gymnasium,simulation,multi-agent,emergency services,crisis management
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Games/Entertainment :: Simulation
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: gymnasium>=0.28.0
+Requires-Dist: numpy>=1.21.0
+Requires-Dist: pygame>=2.1.0
+Requires-Dist: matplotlib>=3.5.0
+Provides-Extra: dev
+Requires-Dist: pytest>=6.0; extra == "dev"
+Requires-Dist: pytest-cov>=2.0; extra == "dev"
+Requires-Dist: black>=21.0; extra == "dev"
+Requires-Dist: flake8>=3.8; extra == "dev"
+Provides-Extra: docs
+Requires-Dist: sphinx>=4.0; extra == "docs"
+Requires-Dist: sphinx-rtd-theme>=1.0; extra == "docs"
+Dynamic: author
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: keywords
+Dynamic: license
+Dynamic: license-file
+Dynamic: project-url
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# Emergency Response Environment 🚨
+
+A comprehensive emergency response coordination environment for reinforcement learning that simulates realistic disaster scenarios with multiple emergency services, complex resource allocation, and time-critical decision making.
+
+![Emergency Response Simulation](https://img.shields.io/badge/Status-Production%20Ready-green) ![Python](https://img.shields.io/badge/Python-3.8%2B-blue) ![License](https://img.shields.io/badge/License-MIT-yellow) ![Gymnasium](https://img.shields.io/badge/Gymnasium-Compatible-red)
+
+## 🌟 Features
+
+### Core Environment
+- **30x30 Metropolitan Grid**: Realistic city simulation with residential, commercial, and industrial zones
+- **40+ Emergency Response Units**: Fire trucks, police cars, ambulances, search & rescue teams, hazmat units, and command vehicles
+- **8 Emergency Types**: Building fires, accidents, chemical spills, floods, earthquakes, gas leaks, medical emergencies, and civil unrest
+- **Complex State Space**: 276 observations including unit positions, emergency status, weather, traffic, and hospital capacity
+- **50 Discrete Actions**: Comprehensive emergency management from unit dispatch to declaring states of emergency
+
+### Advanced Simulation Features
+- **Cascade Effects**: Emergencies can trigger secondary incidents
+- **Resource Fatigue**: Units become less effective with continuous deployment  
+- **Weather Impact**: Visibility, precipitation, and road conditions affect response
+- **Traffic Simulation**: Dynamic congestion based on time of day and emergencies
+- **Hospital System**: 8 hospitals with capacity constraints and trauma capabilities
+- **Communication Networks**: Radio towers, cellular coverage, and emergency broadcasts
+- **Multi-Agency Coordination**: Fire, police, medical, search & rescue, hazmat, and command units
+
+### Visualization & Testing
+- **Pygame Visualization**: Real-time emergency incident tracking with comprehensive dashboard
+- **5 Test Scenarios**: Single incident, multiple incidents, natural disaster, technological disaster, mass casualty
+- **Performance Metrics**: Response times, casualty rates, resource efficiency, coordination scores
+- **Strategy Comparison**: Centralized vs distributed command analysis
+- **Training Reports**: After-action reports and lessons learned documentation
+
+## 🚀 Installation
+
+### Prerequisites
+- Python 3.8 or higher
+- Gymnasium (OpenAI Gym)
+- NumPy
+- Pygame
+- Matplotlib
+
+### Install the Package
+```bash
+# Clone or extract the emergency_response_env package
+cd emergency_response_env
+
+# Install the package
+pip install -e .
+
+# Or install with development dependencies
+pip install -e .[dev]
+```
+
+### Dependencies
+The environment automatically installs these required packages:
+- `gymnasium>=0.28.0` - RL environment framework
+- `numpy>=1.21.0` - Numerical computations
+- `pygame>=2.1.0` - Visualization and rendering
+- `matplotlib>=3.5.0` - Performance charts and analysis
+
+## 📖 Quick Start
+
+### Basic Usage
+```python
+import gymnasium as gym
+import emergency_response_env
+
+# Create environment (no visualization)
+env = gym.make('EmergencyResponse-v0')
+
+# Create environment with pygame visualization  
+env = gym.make('EmergencyResponse-v1')
+
+# Reset environment
+observation, info = env.reset()
+
+# Take actions
+for step in range(1000):
+    action = env.action_space.sample()  # Random action
+    observation, reward, terminated, truncated, info = env.step(action)
+    
+    if terminated or truncated:
+        observation, info = env.reset()
+
+env.close()
+```
+
+### Advanced Usage with Intelligent Agent
+```python
+from emergency_response_env import EmergencyResponseEnv, EmergencyType, UnitType
+
+# Create environment with custom configuration
+env = EmergencyResponseEnv(render_mode="human")
+observation, info = env.reset()
+
+# Intelligent action selection example
+def select_intelligent_action(env, observation):
+    # Analyze current emergencies
+    active_emergencies = len(env.active_emergencies)
+    
+    if active_emergencies > 3:
+        return 44  # Declare state of emergency
+    elif active_emergencies > 1:
+        return 26  # Request mutual aid
+    else:
+        # Dispatch nearest available unit
+        for unit_idx, unit in enumerate(env.response_units):
+            if not unit.busy:
+                return unit_idx
+    
+    return 49  # Normal operations
+
+# Run intelligent agent
+total_reward = 0
+for step in range(500):
+    action = select_intelligent_action(env, observation)
+    observation, reward, terminated, truncated, info = env.step(action)
+    total_reward += reward
+    
+    if terminated or truncated:
+        break
+
+print(f"Episode completed with total reward: {total_reward}")
+env.close()
+```
+
+## 🧪 Testing & Evaluation
+
+### Run Comprehensive Test Suite
+```python
+from emergency_response_env.test_emergency import EmergencyTestSuite
+
+# Create test suite
+test_suite = EmergencyTestSuite(render_mode="human")
+
+# Run all 5 scenarios with visualization
+results = test_suite.run_all_tests(visualize=True)
+
+# Compare different strategies
+strategy_comparison = test_suite.compare_strategies()
+
+# Generate training report
+training_report = test_suite.generate_training_report()
+```
+
+### Command Line Testing
+```bash
+# Run the test suite from command line
+emergency-response-test
+
+# This will:
+# - Run 5 different emergency scenarios
+# - Generate performance visualizations
+# - Create training reports
+# - Compare response strategies
+```
+
+## 📊 Environment Specifications
+
+### State Space (Box: 276 dimensions)
+- **Emergency Incidents** (80): Active emergency locations, types, and severity levels
+- **Response Units** (120): Unit positions, status, and availability
+- **Traffic Conditions** (25): Congestion levels on major road segments  
+- **Hospital Capacity** (24): Available beds, trauma capacity, and distances
+- **Weather Conditions** (5): Visibility, precipitation, wind, temperature
+- **Public Safety** (12): Evacuation zones and casualty counts
+- **Communications** (10): Network status and emergency broadcasts
+
+### Action Space (Discrete: 50 actions)
+- **0-19**: Dispatch specific emergency response units
+- **20-25**: Establish evacuation zones for different city areas
+- **26-31**: Request mutual aid from neighboring jurisdictions
+- **32-37**: Activate emergency shelters and triage centers
+- **38-43**: Redirect traffic and establish emergency routes
+- **44**: Declare state of emergency (unlock additional resources)
+- **45**: Activate emergency broadcast system
+- **46**: Request National Guard assistance
+- **47**: Coordinate with utility companies
+- **48**: Establish incident command post
+- **49**: Normal operations mode
+
+### Reward Structure
+**Positive Rewards:**
+- +10,000: Major disaster successfully contained
+- +5,000: Life saved through quick response
+- +2,000: Emergency resolved within optimal time
+- +1,000: Effective multi-agency coordination
+- +500: Successful evacuation completion
+
+**Negative Penalties:**
+- -20,000: Preventable civilian death
+- -10,000: Emergency escalates to catastrophic level
+- -5,000: Emergency spreads due to delayed response
+- -2,000: Resource misallocation causing delays
+- -1,000: Traffic gridlock preventing access
+
+## 🎯 Emergency Scenarios
+
+### 1. Single Building Fire
+- **Objective**: Coordinate fire and medical response for residential building fire
+- **Challenges**: Smoke conditions, potential evacuations, casualty management
+- **Success Criteria**: < 5 casualties, < 20min response time
+
+### 2. Multiple Rush Hour Incidents  
+- **Objective**: Manage simultaneous accidents and emergencies during peak traffic
+- **Challenges**: Traffic congestion, resource allocation, competing priorities
+- **Success Criteria**: < 10 casualties, < 30min response time
+
+### 3. Major Earthquake
+- **Objective**: Coordinate massive disaster response with infrastructure damage
+- **Challenges**: Building collapses, cascade events, communication disruption
+- **Success Criteria**: < 40 casualties, effective search & rescue deployment
+
+### 4. Industrial Chemical Spill
+- **Objective**: Hazmat response with mass evacuation and environmental protection
+- **Challenges**: Contamination spread, specialized equipment needs, public safety
+- **Success Criteria**: < 20 casualties, successful evacuation and containment
+
+### 5. Mass Casualty Event
+- **Objective**: Stadium disaster requiring massive coordinated response
+- **Challenges**: Crowd control, medical surge, media pressure, resource surge
+- **Success Criteria**: < 60 casualties, effective crowd management
+
+## 🏥 Emergency Services
+
+### Fire Department (4 Stations)
+- **12 Fire Trucks**: Structure fire, rescue, ladder, hazmat support, industrial
+- **Equipment**: Pumpers, ladder trucks, rescue tools, foam units, breathing apparatus
+- **Specializations**: Urban fire, wildland, technical rescue, hazmat operations
+
+### Police Department (3 Precincts)  
+- **8 Police Cars**: Patrol, traffic enforcement, detective, SWAT support, community
+- **Equipment**: Patrol vehicles, riot gear, traffic control, investigation tools
+- **Specializations**: Patrol, traffic, crowd control, investigation, tactical
+
+### Emergency Medical Services (5 Stations)
+- **10 Ambulances**: Advanced life support, basic life support, critical care, mass casualty
+- **Equipment**: Cardiac monitors, medications, trauma kits, ventilators, field hospitals
+- **Specializations**: ALS, BLS, critical care transport, supervisory, rapid response
+
+### Search & Rescue (2 Teams)
+- **6 Teams**: Heavy rescue, canine, technical, swift water, dive, boat operations
+- **Equipment**: Heavy lifting, cutting tools, search cameras, rescue dogs, diving gear
+- **Specializations**: Structural collapse, water rescue, technical rope rescue
+
+### Hazmat Teams (2 Units)
+- **2 Specialized Units**: Chemical/biological response, radiological response
+- **Equipment**: Level A suits, decontamination systems, detection equipment
+- **Specializations**: Chemical spills, radiological incidents, decontamination
+
+### Emergency Management (1 Center)
+- **2 Command Units**: Incident command, mobile command post
+- **Equipment**: Communications, situation displays, resource tracking
+- **Specializations**: Incident command system, resource coordination
+
+## 📈 Performance Metrics
+
+### Response Metrics
+- **Response Time**: Time from incident to first unit arrival
+- **Containment Time**: Time to control/resolve emergency
+- **Casualty Rate**: Civilian casualties per incident
+- **Lives Saved**: Successful rescues and medical interventions
+
+### Resource Metrics  
+- **Unit Utilization**: Percentage of units actively deployed
+- **Resource Efficiency**: Optimal allocation vs actual deployment
+- **Fatigue Levels**: Unit readiness degradation over time
+- **Coordination Score**: Multi-agency cooperation effectiveness
+
+### Strategic Metrics
+- **Success Rate**: Percentage of scenarios completed successfully
+- **Escalation Prevention**: Incidents contained before spreading
+- **Public Safety**: Evacuation effectiveness and civilian protection
+- **Communication Effectiveness**: Network reliability and coverage
+
+## 🎮 Visualization Features
+
+### Real-Time Dashboard
+- **City Overview**: 30x30 grid showing zones, incidents, and units
+- **Emergency Incidents**: Color-coded severity with flashing alerts
+- **Response Units**: Different vehicle types with status indicators
+- **Hospital Status**: Capacity indicators and patient overflow
+- **Weather Overlay**: Conditions affecting emergency response
+
+### Information Panels
+- **Active Emergencies**: Real-time incident list with priorities
+- **Unit Status**: Deployment status and availability
+- **Statistics**: Casualties, lives saved, response times
+- **System Status**: Emergency declarations, mutual aid, communications
+
+### Performance Visualizations
+- **Response Time Charts**: Performance across different scenarios
+- **Casualty Analysis**: Lives saved vs casualties by scenario type
+- **Resource Efficiency**: Unit utilization and coordination metrics  
+- **Strategy Comparison**: Effectiveness of different command approaches
+
+## 🔧 Configuration & Customization
+
+### Environment Parameters
+```python
+# Customize environment settings
+env = EmergencyResponseEnv(
+    render_mode="human",        # Visualization mode
+    grid_size=30,              # City grid dimensions
+    max_emergencies=20,        # Maximum concurrent emergencies
+    num_units=40,              # Total response units
+    max_timesteps=1440         # Episode length (24 hours)
+)
+```
+
+### Scenario Configuration
+Scenarios are defined in `scenarios/emergency_scenarios.json` with:
+- Initial emergency types and locations
+- Weather and traffic conditions  
+- Infrastructure damage parameters
+- Success criteria and objectives
+- Cascade event triggers
+
+### Unit Configuration  
+Unit types and capabilities defined in `scenarios/unit_configurations.json`:
+- Station locations and coverage areas
+- Equipment and specializations
+- Training requirements
+- Mutual aid agreements
+
+## 🤝 Contributing
+
+I welcome contributions to improve the Emergency Response Environment! Here's how you can help:
+
+### Development Setup
+```bash
+# Clone the repository
+git clone <repository-url>
+cd emergency_response_env
+
+# Install development dependencies
+pip install -e .[dev]
+
+# Run tests
+pytest tests/
+
+# Check code formatting
+black .
+flake8 .
+```
+
+### Areas for Contribution
+- **New Emergency Types**: Add additional disaster scenarios
+- **Enhanced AI Agents**: Develop smarter response strategies  
+- **Visualization Improvements**: Better graphics and user interface
+- **Performance Optimization**: Faster simulation and rendering
+- **Documentation**: Tutorials, examples, and API documentation
+- **Testing**: Additional test scenarios and edge cases
+
+## 📚 Research Applications
+
+This environment is designed for research in:
+
+### Reinforcement Learning
+- **Multi-Agent Coordination**: Training agents to coordinate emergency response
+- **Resource Allocation**: Optimal deployment of limited resources
+- **Hierarchical Planning**: Strategic vs tactical decision making
+- **Transfer Learning**: Adapting strategies across different disaster types
+
+### Emergency Management  
+- **Training Simulations**: Emergency responder training and education
+- **Strategy Evaluation**: Testing different response protocols
+- **Resource Planning**: Optimal placement of emergency services
+- **Policy Analysis**: Impact of different emergency management policies
+
+### AI Safety & Robustness
+- **High-Stakes Decision Making**: Life-critical AI system behavior
+- **Uncertainty Handling**: Decision making with incomplete information
+- **Robust Planning**: Performance under adverse conditions
+- **Explainable AI**: Understanding emergency response decisions
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+```
+MIT License
+
+Copyright (c) 2025 Hasnain Fareed
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+```
+
+## 🙏 Acknowledgments
+
+- **Gymnasium Team**: For the excellent RL environment framework
+- **Pygame Community**: For the visualization and rendering capabilities  
+- **Emergency Services**: For inspiration from real-world emergency response protocols
+- **Research Community**: For advancing the field of multi-agent reinforcement learning
+
+## 📞 Support
+
+For questions, issues, or contributions:
+
+- **Documentation**: Check this README and code comments
+- **Issues**: Report bugs and request features via GitHub issues
+- **Discussions**: Join community discussions about emergency management AI
+
+---
+
+**Emergency Response Environment v1.0.0** - Comprehensive emergency management simulation for reinforcement learning research and training.
+
+*Built with ❤️ for the advancement of AI-assisted emergency response systems.*

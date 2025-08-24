@@ -1,0 +1,346 @@
+{
+  "single_incident": {
+    "name": "Single Building Fire",
+    "description": "A single building fire in a residential area requiring coordinated fire and medical response",
+    "initial_emergencies": [
+      {
+        "type": "BUILDING_FIRE",
+        "x": 15,
+        "y": 12,
+        "severity": 6,
+        "casualties": 3
+      }
+    ],
+    "weather": {
+      "visibility": 0.8,
+      "road_conditions": 0.9,
+      "wind_speed": 0.3,
+      "precipitation": 0.1,
+      "temperature": 0.6
+    },
+    "expected_duration": 180,
+    "success_criteria": {
+      "max_casualties": 5,
+      "max_response_time": 20,
+      "containment_time": 120
+    }
+  },
+  
+  "multiple_incidents": {
+    "name": "Rush Hour Multi-Incident",
+    "description": "Multiple simultaneous incidents during rush hour traffic",
+    "initial_emergencies": [
+      {
+        "type": "MULTI_VEHICLE_ACCIDENT",
+        "x": 8,
+        "y": 20,
+        "severity": 7,
+        "casualties": 5
+      },
+      {
+        "type": "MEDICAL_EMERGENCY",
+        "x": 22,
+        "y": 15,
+        "severity": 5,
+        "casualties": 1
+      },
+      {
+        "type": "GAS_LEAK",
+        "x": 18,
+        "y": 8,
+        "severity": 6,
+        "casualties": 0
+      }
+    ],
+    "weather": {
+      "visibility": 0.6,
+      "road_conditions": 0.7,
+      "wind_speed": 0.2,
+      "precipitation": 0.4,
+      "temperature": 0.3
+    },
+    "traffic_multiplier": 1.5,
+    "expected_duration": 300,
+    "success_criteria": {
+      "max_casualties": 10,
+      "max_response_time": 30,
+      "all_contained_time": 240
+    }
+  },
+  
+  "natural_disaster": {
+    "name": "Major Earthquake Event",
+    "description": "Magnitude 6.5 earthquake causing widespread building collapses and infrastructure damage",
+    "initial_emergencies": [
+      {
+        "type": "EARTHQUAKE",
+        "x": 15,
+        "y": 15,
+        "severity": 9,
+        "casualties": 15
+      }
+    ],
+    "cascade_events": [
+      {
+        "trigger_time": 30,
+        "type": "BUILDING_FIRE",
+        "x": 12,
+        "y": 18,
+        "severity": 7,
+        "casualties": 8
+      },
+      {
+        "trigger_time": 45,
+        "type": "GAS_LEAK",
+        "x": 18,
+        "y": 12,
+        "severity": 8,
+        "casualties": 2
+      },
+      {
+        "trigger_time": 60,
+        "type": "BUILDING_FIRE",
+        "x": 20,
+        "y": 20,
+        "severity": 6,
+        "casualties": 4
+      }
+    ],
+    "weather": {
+      "visibility": 0.9,
+      "road_conditions": 0.4,
+      "wind_speed": 0.1,
+      "precipitation": 0.0,
+      "temperature": 0.7
+    },
+    "infrastructure_damage": {
+      "hospital_capacity_reduction": 0.3,
+      "communication_disruption": 0.4,
+      "road_damage": 0.6
+    },
+    "expected_duration": 720,
+    "success_criteria": {
+      "max_casualties": 40,
+      "max_response_time": 45,
+      "containment_time": 600
+    }
+  },
+  
+  "technological_disaster": {
+    "name": "Industrial Chemical Spill",
+    "description": "Major chemical spill at industrial facility requiring hazmat response and mass evacuation",
+    "initial_emergencies": [
+      {
+        "type": "CHEMICAL_SPILL",
+        "x": 25,
+        "y": 18,
+        "severity": 8,
+        "casualties": 12
+      }
+    ],
+    "cascade_events": [
+      {
+        "trigger_time": 20,
+        "type": "MEDICAL_EMERGENCY",
+        "x": 24,
+        "y": 16,
+        "severity": 6,
+        "casualties": 3
+      },
+      {
+        "trigger_time": 40,
+        "type": "MEDICAL_EMERGENCY",
+        "x": 26,
+        "y": 20,
+        "severity": 5,
+        "casualties": 2
+      }
+    ],
+    "weather": {
+      "visibility": 0.7,
+      "road_conditions": 0.8,
+      "wind_speed": 0.6,
+      "precipitation": 0.0,
+      "temperature": 0.8
+    },
+    "evacuation_zones": [4, 5],
+    "environmental_effects": {
+      "contamination_spread": true,
+      "wind_direction_critical": true
+    },
+    "expected_duration": 480,
+    "success_criteria": {
+      "max_casualties": 20,
+      "evacuation_time": 60,
+      "containment_time": 300
+    }
+  },
+  
+  "mass_casualty_event": {
+    "name": "Stadium Disaster",
+    "description": "Major incident at crowded sports stadium requiring massive coordinated response",
+    "initial_emergencies": [
+      {
+        "type": "CIVIL_UNREST",
+        "x": 16,
+        "y": 14,
+        "severity": 9,
+        "casualties": 25
+      }
+    ],
+    "cascade_events": [
+      {
+        "trigger_time": 15,
+        "type": "MULTI_VEHICLE_ACCIDENT",
+        "x": 14,
+        "y": 16,
+        "severity": 7,
+        "casualties": 8
+      },
+      {
+        "trigger_time": 25,
+        "type": "MEDICAL_EMERGENCY",
+        "x": 18,
+        "y": 12,
+        "severity": 8,
+        "casualties": 12
+      },
+      {
+        "trigger_time": 35,
+        "type": "BUILDING_FIRE",
+        "x": 15,
+        "y": 15,
+        "severity": 6,
+        "casualties": 6
+      }
+    ],
+    "weather": {
+      "visibility": 0.9,
+      "road_conditions": 0.8,
+      "wind_speed": 0.2,
+      "precipitation": 0.0,
+      "temperature": 0.9
+    },
+    "crowd_density": 5000,
+    "media_pressure": true,
+    "expected_duration": 600,
+    "success_criteria": {
+      "max_casualties": 60,
+      "evacuation_time": 90,
+      "crowd_control_time": 180
+    }
+  },
+  
+  "winter_storm": {
+    "name": "Severe Winter Storm",
+    "description": "Blizzard conditions causing multiple weather-related emergencies",
+    "initial_emergencies": [
+      {
+        "type": "MULTI_VEHICLE_ACCIDENT",
+        "x": 10,
+        "y": 20,
+        "severity": 6,
+        "casualties": 4
+      }
+    ],
+    "cascade_events": [
+      {
+        "trigger_time": 30,
+        "type": "MEDICAL_EMERGENCY",
+        "x": 5,
+        "y": 25,
+        "severity": 7,
+        "casualties": 2
+      },
+      {
+        "trigger_time": 60,
+        "type": "BUILDING_FIRE",
+        "x": 20,
+        "y": 10,
+        "severity": 5,
+        "casualties": 3
+      },
+      {
+        "trigger_time": 90,
+        "type": "MULTI_VEHICLE_ACCIDENT",
+        "x": 25,
+        "y": 5,
+        "severity": 8,
+        "casualties": 6
+      }
+    ],
+    "weather": {
+      "visibility": 0.2,
+      "road_conditions": 0.3,
+      "wind_speed": 0.9,
+      "precipitation": 0.8,
+      "temperature": 0.1
+    },
+    "seasonal_effects": {
+      "heating_failures": true,
+      "road_closures": 0.4,
+      "power_outages": 0.3
+    },
+    "expected_duration": 480,
+    "success_criteria": {
+      "max_casualties": 25,
+      "max_response_time": 60,
+      "shelter_activation_time": 120
+    }
+  },
+  
+  "cyber_attack": {
+    "name": "Infrastructure Cyber Attack",
+    "description": "Cyber attack on city infrastructure causing communication and utility disruptions",
+    "initial_emergencies": [
+      {
+        "type": "GAS_LEAK",
+        "x": 12,
+        "y": 8,
+        "severity": 7,
+        "casualties": 0
+      }
+    ],
+    "cascade_events": [
+      {
+        "trigger_time": 20,
+        "type": "MULTI_VEHICLE_ACCIDENT",
+        "x": 18,
+        "y": 22,
+        "severity": 6,
+        "casualties": 5
+      },
+      {
+        "trigger_time": 45,
+        "type": "MEDICAL_EMERGENCY",
+        "x": 8,
+        "y": 15,
+        "severity": 8,
+        "casualties": 3
+      }
+    ],
+    "weather": {
+      "visibility": 0.8,
+      "road_conditions": 0.9,
+      "wind_speed": 0.1,
+      "precipitation": 0.0,
+      "temperature": 0.6
+    },
+    "cyber_effects": {
+      "communication_failure": 0.7,
+      "traffic_light_failure": true,
+      "hospital_system_disruption": 0.4,
+      "emergency_dispatch_delay": 0.5
+    },
+    "expected_duration": 360,
+    "success_criteria": {
+      "max_casualties": 15,
+      "communication_restore_time": 180,
+      "system_recovery_time": 300
+    }
+  }
+}
+
+
+
+

@@ -1,0 +1,2 @@
+[console_scripts]
+emergency-response-test = emergency_response_env.test_emergency:main

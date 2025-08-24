@@ -1,0 +1,302 @@
+{
+  "fire_departments": {
+    "stations": [
+      {
+        "id": 1,
+        "name": "Station 1 - Downtown",
+        "location": [5, 5],
+        "coverage_area": "residential_north",
+        "units": [
+          {"type": "FIRE_TRUCK", "id": "F1", "specialization": "structure_fire", "crew_size": 4},
+          {"type": "FIRE_TRUCK", "id": "F2", "specialization": "rescue", "crew_size": 4},
+          {"type": "FIRE_TRUCK", "id": "F3", "specialization": "ladder", "crew_size": 3}
+        ],
+        "equipment": ["ladder_truck", "pumper", "rescue_tools", "medical_kit"]
+      },
+      {
+        "id": 2,
+        "name": "Station 2 - Eastside",
+        "location": [25, 5],
+        "coverage_area": "residential_east",
+        "units": [
+          {"type": "FIRE_TRUCK", "id": "F4", "specialization": "structure_fire", "crew_size": 4},
+          {"type": "FIRE_TRUCK", "id": "F5", "specialization": "wildland", "crew_size": 3},
+          {"type": "FIRE_TRUCK", "id": "F6", "specialization": "hazmat_support", "crew_size": 4}
+        ],
+        "equipment": ["pumper", "wildland_truck", "foam_unit", "breathing_apparatus"]
+      },
+      {
+        "id": 3,
+        "name": "Station 3 - Southside",
+        "location": [5, 25],
+        "coverage_area": "residential_south",
+        "units": [
+          {"type": "FIRE_TRUCK", "id": "F7", "specialization": "structure_fire", "crew_size": 4},
+          {"type": "FIRE_TRUCK", "id": "F8", "specialization": "rescue", "crew_size": 4},
+          {"type": "FIRE_TRUCK", "id": "F9", "specialization": "ladder", "crew_size": 3}
+        ],
+        "equipment": ["ladder_truck", "pumper", "rescue_tools", "ventilation_fan"]
+      },
+      {
+        "id": 4,
+        "name": "Station 4 - Industrial",
+        "location": [25, 25],
+        "coverage_area": "industrial_district",
+        "units": [
+          {"type": "FIRE_TRUCK", "id": "F10", "specialization": "industrial", "crew_size": 5},
+          {"type": "FIRE_TRUCK", "id": "F11", "specialization": "hazmat_support", "crew_size": 4},
+          {"type": "FIRE_TRUCK", "id": "F12", "specialization": "foam", "crew_size": 3}
+        ],
+        "equipment": ["heavy_rescue", "foam_truck", "hazmat_trailer", "industrial_tools"]
+      }
+    ]
+  },
+  
+  "police_departments": {
+    "precincts": [
+      {
+        "id": 1,
+        "name": "Central Precinct",
+        "location": [10, 10],
+        "coverage_area": "downtown_commercial",
+        "units": [
+          {"type": "POLICE_CAR", "id": "P1", "specialization": "patrol", "officers": 2},
+          {"type": "POLICE_CAR", "id": "P2", "specialization": "traffic", "officers": 2},
+          {"type": "POLICE_CAR", "id": "P3", "specialization": "detective", "officers": 2}
+        ],
+        "equipment": ["patrol_vehicles", "traffic_cones", "investigation_kit", "riot_gear"]
+      },
+      {
+        "id": 2,
+        "name": "North Precinct",
+        "location": [20, 10],
+        "coverage_area": "residential_commercial",
+        "units": [
+          {"type": "POLICE_CAR", "id": "P4", "specialization": "patrol", "officers": 2},
+          {"type": "POLICE_CAR", "id": "P5", "specialization": "community", "officers": 2},
+          {"type": "POLICE_CAR", "id": "P6", "specialization": "swat_support", "officers": 4}
+        ],
+        "equipment": ["patrol_vehicles", "community_outreach", "tactical_gear", "crowd_control"]
+      },
+      {
+        "id": 3,
+        "name": "South Precinct",
+        "location": [15, 20],
+        "coverage_area": "mixed_residential",
+        "units": [
+          {"type": "POLICE_CAR", "id": "P7", "specialization": "patrol", "officers": 2},
+          {"type": "POLICE_CAR", "id": "P8", "specialization": "traffic", "officers": 2}
+        ],
+        "equipment": ["patrol_vehicles", "speed_enforcement", "accident_investigation"]
+      }
+    ]
+  },
+  
+  "emergency_medical_services": {
+    "stations": [
+      {
+        "id": 1,
+        "name": "EMS Station Alpha",
+        "location": [8, 8],
+        "coverage_area": "northwest_sector",
+        "units": [
+          {"type": "AMBULANCE", "id": "A1", "specialization": "als", "crew_size": 2},
+          {"type": "AMBULANCE", "id": "A2", "specialization": "bls", "crew_size": 2}
+        ],
+        "equipment": ["advanced_life_support", "cardiac_monitor", "medications", "trauma_kit"]
+      },
+      {
+        "id": 2,
+        "name": "EMS Station Bravo",
+        "location": [22, 8],
+        "coverage_area": "northeast_sector",
+        "units": [
+          {"type": "AMBULANCE", "id": "A3", "specialization": "als", "crew_size": 2},
+          {"type": "AMBULANCE", "id": "A4", "specialization": "critical_care", "crew_size": 3}
+        ],
+        "equipment": ["critical_care_transport", "ventilator", "blood_products", "surgical_kit"]
+      },
+      {
+        "id": 3,
+        "name": "EMS Station Charlie",
+        "location": [8, 22],
+        "coverage_area": "southwest_sector",
+        "units": [
+          {"type": "AMBULANCE", "id": "A5", "specialization": "als", "crew_size": 2},
+          {"type": "AMBULANCE", "id": "A6", "specialization": "bls", "crew_size": 2}
+        ],
+        "equipment": ["advanced_life_support", "pediatric_kit", "obstetric_kit", "spinal_board"]
+      },
+      {
+        "id": 4,
+        "name": "EMS Station Delta",
+        "location": [22, 22],
+        "coverage_area": "southeast_sector",
+        "units": [
+          {"type": "AMBULANCE", "id": "A7", "specialization": "als", "crew_size": 2},
+          {"type": "AMBULANCE", "id": "A8", "specialization": "mass_casualty", "crew_size": 3}
+        ],
+        "equipment": ["mass_casualty_trailer", "triage_supplies", "field_hospital", "communications"]
+      },
+      {
+        "id": 5,
+        "name": "EMS Station Echo",
+        "location": [15, 15],
+        "coverage_area": "central_district",
+        "units": [
+          {"type": "AMBULANCE", "id": "A9", "specialization": "supervisor", "crew_size": 1},
+          {"type": "AMBULANCE", "id": "A10", "specialization": "rapid_response", "crew_size": 2}
+        ],
+        "equipment": ["command_vehicle", "rapid_response_kit", "bike_team", "special_operations"]
+      }
+    ]
+  },
+  
+  "search_and_rescue": {
+    "teams": [
+      {
+        "id": 1,
+        "name": "Urban Search and Rescue Team 1",
+        "location": [12, 18],
+        "specialization": "structural_collapse",
+        "units": [
+          {"type": "SEARCH_RESCUE", "id": "SR1", "specialization": "heavy_rescue", "crew_size": 8},
+          {"type": "SEARCH_RESCUE", "id": "SR2", "specialization": "canine", "crew_size": 4},
+          {"type": "SEARCH_RESCUE", "id": "SR3", "specialization": "technical", "crew_size": 6}
+        ],
+        "equipment": ["heavy_lifting", "cutting_tools", "search_cameras", "rescue_dogs", "rope_rescue"]
+      },
+      {
+        "id": 2,
+        "name": "Water Rescue Team",
+        "location": [18, 12],
+        "specialization": "water_rescue",
+        "units": [
+          {"type": "SEARCH_RESCUE", "id": "SR4", "specialization": "swift_water", "crew_size": 6},
+          {"type": "SEARCH_RESCUE", "id": "SR5", "specialization": "dive", "crew_size": 4},
+          {"type": "SEARCH_RESCUE", "id": "SR6", "specialization": "boat", "crew_size": 4}
+        ],
+        "equipment": ["rescue_boats", "diving_gear", "swift_water_gear", "sonar_equipment"]
+      }
+    ]
+  },
+  
+  "hazmat_teams": {
+    "units": [
+      {
+        "id": 1,
+        "name": "Hazmat Response Team 1",
+        "location": [20, 16],
+        "specialization": "chemical_biological",
+        "units": [
+          {"type": "HAZMAT", "id": "H1", "specialization": "decontamination", "crew_size": 6}
+        ],
+        "equipment": ["level_a_suits", "decon_shower", "chemical_detection", "containment_supplies"]
+      },
+      {
+        "id": 2,
+        "name": "Hazmat Response Team 2",
+        "location": [16, 20],
+        "specialization": "radiological",
+        "units": [
+          {"type": "HAZMAT", "id": "H2", "specialization": "radiological", "crew_size": 4}
+        ],
+        "equipment": ["radiation_detectors", "rad_suits", "monitoring_equipment", "shielding_materials"]
+      }
+    ]
+  },
+  
+  "emergency_management": {
+    "command_centers": [
+      {
+        "id": 1,
+        "name": "Emergency Operations Center",
+        "location": [15, 10],
+        "units": [
+          {"type": "COMMAND", "id": "C1", "specialization": "incident_command", "crew_size": 4},
+          {"type": "COMMAND", "id": "C2", "specialization": "mobile_command", "crew_size": 3}
+        ],
+        "equipment": ["command_post", "communications", "situation_display", "resource_tracking"]
+      }
+    ]
+  },
+  
+  "response_protocols": {
+    "building_fire": {
+      "first_alarm": ["F1", "A1"],
+      "second_alarm": ["F2", "F3", "A2", "P1"],
+      "third_alarm": ["F4", "F5", "A3", "A4", "SR1", "C1"],
+      "special_circumstances": {
+        "high_rise": ["F6", "F7", "SR2"],
+        "industrial": ["F10", "F11", "H1"],
+        "wildland_interface": ["F5", "F8"]
+      }
+    },
+    "multi_vehicle_accident": {
+      "minor": ["P1", "A1"],
+      "major": ["P1", "P2", "A1", "A2", "F1"],
+      "mass_casualty": ["P1", "P2", "P3", "A1", "A2", "A3", "A8", "C1", "F1"]
+    },
+    "chemical_spill": {
+      "level_1": ["H1", "F1", "P1"],
+      "level_2": ["H1", "H2", "F1", "F2", "P1", "P2", "A1"],
+      "level_3": ["H1", "H2", "F1", "F2", "F3", "P1", "P2", "P3", "A1", "A2", "A3", "C1", "SR1"]
+    },
+    "natural_disaster": {
+      "earthquake": ["SR1", "SR2", "SR3", "SR4", "F1", "F2", "F3", "F4", "A1", "A2", "A3", "A4", "P1", "P2", "C1", "C2"],
+      "flood": ["SR4", "SR5", "SR6", "F1", "F2", "A1", "A2", "P1", "C1"],
+      "severe_weather": ["F1", "F2", "A1", "A2", "P1", "P2", "C1"]
+    }
+  },
+  
+  "mutual_aid_agreements": {
+    "neighboring_departments": [
+      {
+        "name": "County Fire Department",
+        "available_units": ["F_County1", "F_County2", "F_County3"],
+        "response_time": 25,
+        "specializations": ["wildland", "heavy_rescue"]
+      },
+      {
+        "name": "State Police",
+        "available_units": ["SP1", "SP2"],
+        "response_time": 30,
+        "specializations": ["traffic", "investigation", "crowd_control"]
+      },
+      {
+        "name": "Regional Medical Center",
+        "available_units": ["A_Regional1", "A_Regional2"],
+        "response_time": 20,
+        "specializations": ["critical_care", "air_medical"]
+      }
+    ]
+  },
+  
+  "training_requirements": {
+    "fire_department": {
+      "basic_firefighter": 240,
+      "hazmat_operations": 24,
+      "technical_rescue": 80,
+      "ems_basic": 40,
+      "incident_command": 16
+    },
+    "police_department": {
+      "basic_police": 720,
+      "traffic_enforcement": 40,
+      "crowd_control": 24,
+      "emergency_response": 16,
+      "incident_command": 16
+    },
+    "ems": {
+      "emt_basic": 180,
+      "emt_advanced": 300,
+      "paramedic": 1200,
+      "critical_care": 80,
+      "mass_casualty": 24
+    }
+  }
+}
+
+
+
+
